@@ -1,21 +1,21 @@
-create sequence hibernate_sequence start 2 increment 1;
+create sequence hibernate_sequence start 1 increment 1;
 
 create table request (
-                         id int8 not null,
+                         id serial not null,
                          filename varchar(255),
                          tag varchar(255) not null ,
                          text varchar(255) not null ,
                          status varchar(255),
-                         user_id int8,
-                         service_id int8,
+                         user_id int4,
+                         service_id int4,
                          primary key (id));
 
 create table user_role (
-                           user_id int8 not null,
+                           user_id int4 not null,
                            roles varchar(255));
 
 create table usr (
-                     id int8 not null,
+                     id serial not null,
                      activation_code varchar(255),
                      active boolean not null,
                      email varchar(255),
@@ -24,7 +24,7 @@ create table usr (
                      primary key (id));
 
 create table services (
-                          id int8 not null,
+                          id serial not null,
                           service_name varchar(255),
                           primary key (id));
 

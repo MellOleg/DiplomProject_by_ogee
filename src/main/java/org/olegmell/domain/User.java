@@ -18,8 +18,8 @@ import java.util.Set;
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @NotBlank(message = "Имя пользователя не должно быть пустым")
     private String username;
     @NotBlank(message = "Пароль не должен быть пустым")

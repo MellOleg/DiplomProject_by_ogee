@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Setter
 public class Services {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String service_name;
 
