@@ -123,7 +123,7 @@ public class MainController {
     @GetMapping("/del-user-requests/{user}")
     public String deleteRequest(
             @PathVariable Long user,
-            @RequestParam("request") Long requestId
+            @RequestParam("request") Integer requestId
     ) throws IOException {
 
         requestRepository.deleteById(requestId);

@@ -1,10 +1,10 @@
 create table performing_organisation (
-    id int8 not null,
+    id serial not null,
     performing_address varchar(255),
     performing_email varchar(255),
     performing_name varchar(255),
     performing_number int4 not null,
-    service_id int8,
+    service_id int4,
     primary key (id));
 
 alter table if exists performing_organisation

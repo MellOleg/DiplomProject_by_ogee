@@ -12,8 +12,8 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotBlank(message = "Пожалуйста, введите сообщение")
     private String text;
