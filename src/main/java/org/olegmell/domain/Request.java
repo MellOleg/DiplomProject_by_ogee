@@ -2,6 +2,7 @@ package org.olegmell.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -29,6 +30,10 @@ public class Request {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id")
     private Services services;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id")
+    private Statuses statuses;
 
     private String filename;
 

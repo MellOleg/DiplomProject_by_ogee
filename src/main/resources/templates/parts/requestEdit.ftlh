@@ -1,4 +1,5 @@
 <#include "security.ftlh">
+
 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Добавить объявление
 </a>
@@ -23,6 +24,8 @@
                     </div>
                 </#if>
             </div>
+
+
             <div class="form-group">
                 <#if isAdmin>
                     <input type="text" class="form-control" name="status" value="<#if request??>${request.status}</#if>" />

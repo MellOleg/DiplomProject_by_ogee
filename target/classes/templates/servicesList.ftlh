@@ -28,6 +28,21 @@
 
     </#list>
     <br>
+
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Выберите услугу</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <#list servicesIterable as service>
+                    <option type="text" value="${service.service_name}">
+                        <#if service.id == service.id>${service.service_name}</#if>
+                    </option>
+                </#list>
+            </select>
+        </div>
+    </form>
+
+
     <select class="form-select"  aria-label="Default select example"
             value="" name="tag">
         <option value="">Выберите тип услуги</option>
