@@ -2,9 +2,11 @@ package org.olegmell.controller;
 
 import org.olegmell.domain.Request;
 import org.olegmell.domain.Role;
+import org.olegmell.domain.Statuses;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
+import org.olegmell.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +36,9 @@ public class MainController {
 
     @Autowired
     private ServicesRepository servicesRepository;
+
+    @Autowired
+    private StatusRepository statusRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -136,6 +141,7 @@ public class MainController {
     public String updateRequest(
 
             @PathVariable Long user,
+            Model model,
             @RequestParam("id") Request request,
             @RequestParam("text") String text,
             @RequestParam("status") String status,
