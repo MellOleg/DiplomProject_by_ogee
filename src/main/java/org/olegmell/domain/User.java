@@ -53,6 +53,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Request> requests;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "user_role_id")
+    private UserRoles rolesss;
+
+
     public boolean isAdmin(){
         return roles.contains(Role.ADMIN);
     }
