@@ -2,7 +2,7 @@ package org.olegmell.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.StringUtils;
+import org.olegmell.controller.StatusController;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,8 +21,6 @@ public class Request {
     @NotBlank(message = "Пожалуйста, введите тэг")
     private String tag;
 
-    private String status;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "user_id")
     private User author;
@@ -31,9 +29,9 @@ public class Request {
     @JoinColumn(name = "service_id")
     private Services services;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status_id")
-    private Statuses statuses;
+    private Status status;
 
     private String filename;
 
@@ -44,6 +42,7 @@ public class Request {
         this.author = user;
         this.text = text;
         this.tag = tag;
+        this.status = StatusController.getStatus(1);
     }
 
     public String getAuthorName(){
@@ -51,11 +50,11 @@ public class Request {
     }
 
     public String getStatus(){
-        if(status != null && !status.isEmpty()){
-            return status ;
+        if(status != null){
+            return status.getName() ;
         }
         else {
-            return status = "На рассмотрении";
+            return "На рассмотрении";
         }
     }
 }

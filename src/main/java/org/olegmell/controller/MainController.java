@@ -1,8 +1,7 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.Request;
-import org.olegmell.domain.Role;
-import org.olegmell.domain.Statuses;
+import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
@@ -15,10 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -26,8 +23,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -52,6 +47,7 @@ public class MainController {
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestRepository.findAll();
+        Iterable<Status> requestStatus = statusRepository.findAll();
 
         if (filter != null && !filter.isEmpty()) {
             requests = requestRepository.findByTag(filter);
@@ -61,6 +57,7 @@ public class MainController {
 
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);
+        model.addAttribute("status", requestStatus);
 
         return "main";
     }
@@ -87,8 +84,10 @@ public class MainController {
         }
 
         Iterable<Request> requests = requestRepository.findAll();
+        Iterable<Status> requestStatus = statusRepository.findAll();
 
         model.addAttribute("requests", requests);
+        model.addAttribute("status", requestStatus);
 
         return "requestEditAdmin"; //in second version: return main
     }
@@ -117,7 +116,9 @@ public class MainController {
             Model model,
             @RequestParam(required = false) Request request//Request request
     ) {
+        Iterable<Status> requestStatus = statusRepository.findAll();
         Set<Request> requests = user.getRequests();
+        model.addAttribute("status", requestStatus);
         model.addAttribute("requests", requests);
         model.addAttribute("request", request);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
@@ -156,7 +157,7 @@ public class MainController {
                 request.setTag(tag);
             }
             if(!StringUtils.isEmpty(status)){
-                request.setStatus(status);
+                request.setStatus(statusRepository.findFirstByName(status));
             }
 
             saveFile(request, file);

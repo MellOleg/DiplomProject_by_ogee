@@ -28,7 +28,14 @@
 
             <div class="form-group">
                 <#if isAdmin>
-                    <input type="text" class="form-control" name="status" value="<#if request??>${request.status}</#if>" />
+                    <label for="requestStatus">Выберите статус</label>
+                        <select class="form-control" id="requestStatus">
+                            <#list status as requestStatus>
+                                <option value="${requestStatus.name}">
+                                    <#if requestStatus.id == requestStatus.id>${requestStatus.name}</#if>
+                                </option>
+                            </#list>
+                        </select>
                 </#if>
             </div>
             <div class="custom-file">

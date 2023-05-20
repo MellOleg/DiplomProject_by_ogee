@@ -1,6 +1,6 @@
 package org.olegmell.controller;
 
-import org.olegmell.domain.Statuses;
+import org.olegmell.domain.Status;
 import org.olegmell.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/statuses")
+@RequestMapping("/status")
 public class StatusController {
     @Autowired
-    private StatusRepository statusRepository;
+    private static StatusRepository statusRepository;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String statusList(Model model){
-        Iterable<Statuses> statusesIterable = statusRepository.findAll();
-        model.addAttribute("statusesIterable", statusesIterable);
+        Iterable<Status> statusesIterable = statusRepository.findAll();
+        model.addAttribute("statusIterable", statusesIterable);
         return "statusList";
     }
 
@@ -35,8 +35,17 @@ public class StatusController {
     @PostMapping("/add")
     public String addStatusPost(@RequestParam String statusName,
                                  Model model) {
-        Statuses statuses = new Statuses(statusName);
-        statusRepository.save(statuses);
-        return "redirect:/statuses";
+        Status status = new Status(statusName);
+        statusRepository.save(status);
+        return "redirect:/status";
+    }
+
+    public String getStatusName (int Id){
+        Status status = statusRepository.getOne(Id);
+        return status.getName();
+    }
+
+    public static Status getStatus(int Id){
+        return statusRepository.getOne(Id);
     }
 }
