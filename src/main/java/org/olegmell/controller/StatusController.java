@@ -2,6 +2,7 @@ package org.olegmell.controller;
 
 import org.olegmell.domain.Status;
 import org.olegmell.repository.StatusRepository;
+import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StatusController {
     @Autowired
     private static StatusRepository statusRepository;
+
+    @Autowired
+    private StatusService statusService;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping

@@ -22,7 +22,6 @@ public class Status {
     public Status() {
 
     }
-
     public Status(String statusName) {
         this.name = statusName;
     }

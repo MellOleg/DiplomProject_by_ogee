@@ -49,12 +49,15 @@ public class Request {
         return author != null ? author.getUsername() : "<none>";
     }
 
-    public String getStatus(){
-        if(status != null){
-            return status.getName() ;
-        }
-        else {
-            return "На рассмотрении";
-        }
-    }
+    //public String getStatus(){
+    //    if(status != null){
+    //        return status.getName() ;
+    //    }
+    //    else {
+    //        return "На рассмотрении";
+    //    }
+    //}
+
+
+
 }

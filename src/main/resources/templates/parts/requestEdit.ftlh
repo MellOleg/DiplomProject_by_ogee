@@ -29,10 +29,10 @@
             <div class="form-group">
                 <#if isAdmin>
                     <label for="requestStatus">Выберите статус</label>
-                        <select class="form-control" id="requestStatus">
+                        <select class="form-control" id="requestStatus" name="requestStatus">
                             <#list status as requestStatus>
-                                <option value="${requestStatus.name}">
-                                    <#if requestStatus.id == requestStatus.id>${requestStatus.name}</#if>
+                                <option value="${requestStatus.id}">
+                                    ${requestStatus.name}
                                 </option>
                             </#list>
                         </select>
