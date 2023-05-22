@@ -43,19 +43,15 @@ public class StatusController {
     public String addStatusPost(@RequestParam String statusName,
                                  Model model) {
         Status status = new Status(statusName);
-        statusService.save(status);
+        statusService.createStatus(status);
         return "redirect:/status";
     }
 
     public String getStatusName (int Id){
-        String statusName = statusService.getStatusById(Id).isEmpty() ? "Такого статуса не существует" : ;
-        return status.getName();
+        return statusService.getStatusName(Id);
     }
 
     public Status getStatus(int Id){
-
-        return statusService.getStatusById(Id).orElseThrow(
-                () -> new ResourceNotFoundException("User not found with userId " + Id)
-        );
+        return statusService.getStatusById(Id);
     }
 }

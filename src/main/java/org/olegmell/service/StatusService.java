@@ -21,12 +21,15 @@ public class StatusService {
         return statusRepository.findAll();
     }
 
-    public Optional<Status> getStatusById(int Id) {
-        return statusRepository.findById(Id);
+    public Status getStatusById(int Id) {
+        return statusRepository.getOne(Id);
     }
 
     public String getStatusName (int Id){
-        Optional<Status> matchedStatus = getStatusById(Id);
-        if(matchedStatus.ifPresent)(status -> {status.getName();});
+        return getStatusById(Id).getName();
+    }
+
+    public void createStatus (Status newStatus){
+        statusRepository.save(newStatus);
     }
 }
