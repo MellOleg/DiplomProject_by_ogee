@@ -3,6 +3,7 @@ package org.olegmell.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.olegmell.controller.StatusController;
+import org.olegmell.service.StatusService;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -38,11 +39,11 @@ public class Request {
     public Request() {
     }
 
-    public Request(String text, String tag, User user) {
+    public Request(String text, String tag, User user, Status status) {
         this.author = user;
         this.text = text;
         this.tag = tag;
-        this.status = StatusController.getStatus(1);
+        this.status = status;
     }
 
     public String getAuthorName(){
