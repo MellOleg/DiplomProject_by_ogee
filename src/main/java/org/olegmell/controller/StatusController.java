@@ -1,7 +1,9 @@
 package org.olegmell.controller;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.olegmell.domain.Status;
 import org.olegmell.repository.StatusRepository;
+import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -14,13 +16,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/status")
 public class StatusController {
+
+    private final StatusService statusService;
+
     @Autowired
-    private static StatusRepository statusRepository;
+    public StatusController(StatusService statusService) {
+        this.statusService = statusService;
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String statusList(Model model){
-        Iterable<Status> statusesIterable = statusRepository.findAll();
+        Iterable<Status> statusesIterable = statusService.getAllStatuses();
         model.addAttribute("statusIterable", statusesIterable);
         return "statusList";
     }
@@ -36,16 +43,19 @@ public class StatusController {
     public String addStatusPost(@RequestParam String statusName,
                                  Model model) {
         Status status = new Status(statusName);
-        statusRepository.save(status);
+        statusService.save(status);
         return "redirect:/status";
     }
 
     public String getStatusName (int Id){
-        Status status = statusRepository.getOne(Id);
+        String statusName = statusService.getStatusById(Id).isEmpty() ? "Такого статуса не существует" : ;
         return status.getName();
     }
 
-    public static Status getStatus(int Id){
-        return statusRepository.getOne(Id);
+    public Status getStatus(int Id){
+
+        return statusService.getStatusById(Id).orElseThrow(
+                () -> new ResourceNotFoundException("User not found with userId " + Id)
+        );
     }
 }

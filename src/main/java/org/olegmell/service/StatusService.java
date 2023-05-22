@@ -24,4 +24,9 @@ public class StatusService {
     public Optional<Status> getStatusById(int Id) {
         return statusRepository.findById(Id);
     }
+
+    public String getStatusName (int Id){
+        Optional<Status> matchedStatus = getStatusById(Id);
+        if(matchedStatus.ifPresent)(status -> {status.getName();});
+    }
 }
