@@ -5,7 +5,6 @@ create table request (
                          filename varchar(255),
                          tag varchar(255) not null ,
                          text varchar(255) not null ,
-                         status varchar(255),
                          user_id int4,
                          status_id int4,
                          service_id int4,

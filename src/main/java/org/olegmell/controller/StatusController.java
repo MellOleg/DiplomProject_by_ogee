@@ -24,9 +24,6 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @Autowired
-    private StatusService statusService;
-
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String statusList(Model model){

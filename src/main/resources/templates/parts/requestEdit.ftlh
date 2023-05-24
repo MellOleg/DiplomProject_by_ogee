@@ -37,13 +37,21 @@
                             </#list>
                         </select>
                 </#if>
+                    <select hidden class="form-control" id="requestStatus" name="requestStatus">
+                        <#list status as requestStatus>
+                            <option value="${requestStatus.id}">
+                                ${requestStatus.name}
+                            </option>
+                        </#list>
+                    </select>
             </div>
+
             <div class="custom-file">
                 <input type="file" name="file" id="customFile">
                 <label class="custom-file-label" for="customFile">Выбрать файл</label>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" /></br>
-            <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if>" /></br>
+            <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if> " /></br>
             <div class="form-group mt-3">
                 <button type="submit" class="btn btn-primary ">Сохранить</button>
             </div>
