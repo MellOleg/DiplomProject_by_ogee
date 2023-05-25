@@ -1,9 +1,5 @@
 <#include "security.ftlh">
 
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Добавить объявление
-</a>
-<div class="collapse <#if request??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -57,4 +53,3 @@
             </div>
         </form>
     </div>
-</div>

@@ -10,6 +10,7 @@
         </div>
     </div>
 
-    <#include "parts/requestEdit.ftlh">
+    <a type="button" class="btn btn-primary" href="/createrequest">Добавить объявление</a>
+
     <#include "parts/requestList.ftlh">
 </@c.page>
