@@ -132,7 +132,7 @@ public class RequestController {
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
 
-        return "redirect:/request/list/" + user.getId();
+        return "userRequests" ;
     }
 
 

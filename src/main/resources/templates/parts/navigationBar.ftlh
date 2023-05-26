@@ -18,7 +18,7 @@
             </li>
             <#if user??>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/myrequests/${currentUserId}">Мои заявки</a>
+                    <a class="nav-link" href="/user/myrequests">Мои заявки</a>
                 </li>
             </#if>
             <#if user??&&name!="Guest">               <!--<if user??&&name!="Guest"> -->
