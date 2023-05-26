@@ -4,6 +4,8 @@
         <div class="card my-3">
             <#if request.filename??>
                 <img src="/img/${request.filename}" class="card-img-top">
+            <#else>
+                <img src="/img/placeholder-16-9.jpg" class="card-img-top">
             </#if>
             <div class="m-2">
                 <span>${request.text}</span><br>
