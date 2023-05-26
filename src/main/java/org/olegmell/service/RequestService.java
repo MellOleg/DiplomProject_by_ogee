@@ -29,7 +29,7 @@ public class RequestService{
         return newRequest.getId();
     }
 
-    public Request getReguestById (Integer id){
+    public Request getRequestById (Integer id){
         return requestRepository.getOne(id);
     }
 

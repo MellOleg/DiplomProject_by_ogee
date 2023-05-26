@@ -1,7 +1,10 @@
 package org.olegmell.controller;
 
+import org.olegmell.domain.Request;
 import org.olegmell.domain.Role;
+import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
+import org.olegmell.service.StatusService;
 import org.olegmell.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,12 +15,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StatusService statusService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -29,6 +36,24 @@ public class UserController {
 
         return "userList";
     }
+
+    @GetMapping("/myrequests/{user}")
+    public String userRequests (
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable User user,  //надо подправить на RequestBody
+            Model model,
+            @RequestParam(required = false) Request request//Request request
+    ) {
+        Iterable<Status> requestStatus = statusService.getAllStatuses();
+        Set<Request> requests = user.getRequests();
+        model.addAttribute("status", requestStatus);
+        model.addAttribute("requests", requests);
+        model.addAttribute("request", request);
+        model.addAttribute("isCurrentUser", currentUser.equals(user));
+
+        return "home";
+    }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {

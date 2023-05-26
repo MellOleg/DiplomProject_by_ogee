@@ -26,7 +26,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Controller
-public class MainController {
+public class HomeController {
     @Autowired
     private RequestRepository requestRepository;
 
@@ -45,7 +45,7 @@ public class MainController {
         return "greeting";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/home")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestRepository.findAll();
         Iterable<Status> requestStatus = statusRepository.findAll();
@@ -60,10 +60,10 @@ public class MainController {
         model.addAttribute("filter", filter);
         model.addAttribute("status", requestStatus);
 
-        return "main";
+        return "home";
     }
 
-    @PostMapping(path ="/main", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(path ="/home", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public String add(
             @AuthenticationPrincipal User user,
             @Valid Request request,

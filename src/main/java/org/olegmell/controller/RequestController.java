@@ -14,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,12 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 @Controller
+@RequestMapping("/request")
 public class RequestController {
     @Autowired
     private RequestService requestService;
@@ -35,11 +34,17 @@ public class RequestController {
     @Autowired
     StatusService statusService;
 
+    @Autowired
+    private RequestRepository requestRepository;
+
+    @Autowired
+    private StatusRepository statusRepository;
+
     @Value("${upload.path}")
     private String uploadPath;
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/requestEditAdmin")
+    @GetMapping("/request")
     public String requestAdminPage(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestService.getAllRequests();
 
@@ -52,28 +57,12 @@ public class RequestController {
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);
 
-        return "requestEditAdmin";
+        return "home";
     }
 
-    @GetMapping("/user-requests/{user}")
-    @ResponseBody
-    public String userRequests (
-            @AuthenticationPrincipal User currentUser,
-            @PathVariable User user,  //надо подправить на RequestBody
-            Model model,
-            @RequestParam(required = false) Request request//Request request
-    ) {
-        Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Set<Request> requests = user.getRequests();
-        model.addAttribute("status", requestStatus);
-        model.addAttribute("requests", requests);
-        model.addAttribute("request", request);
-        model.addAttribute("isCurrentUser", currentUser.equals(user));
-        return "userRequests";
-    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/del-user-requests/{user}")
+    @GetMapping("/delete/{user}")
     public String deleteRequest(
             @PathVariable Long user,
             @RequestParam("request") Integer requestId
@@ -81,7 +70,7 @@ public class RequestController {
 
         requestService.deleteById(requestId);
 
-        return "redirect:/main";
+        return "redirect:/home";
     }
 
 
@@ -100,7 +89,7 @@ public class RequestController {
         }
     }
 
-    @GetMapping("/createrequest")
+    @GetMapping("/create")
     public String createRequest(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestService.getAllRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
@@ -118,7 +107,7 @@ public class RequestController {
         return "createRequest";
     }
 
-    @PostMapping(path ="/createrequest", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(path ="/create", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public String createrequest(
             @AuthenticationPrincipal User user,
             @Valid Request request,
@@ -143,6 +132,8 @@ public class RequestController {
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
 
-        return "/user-requests/" + user.getId();
+        return "redirect:/request/list/" + user.getId();
     }
+
+
 }
