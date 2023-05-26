@@ -1,5 +1,6 @@
 package org.olegmell.service;
 
+import org.olegmell.domain.Request;
 import org.olegmell.domain.Role;
 import org.olegmell.domain.User;
 import org.olegmell.repository.UserRepository;
@@ -102,5 +103,9 @@ public class UserService implements UserDetailsService {
         if(isEmailChanged){
             sendMessage(user);
         }
+    }
+
+    public Set<Request> getUserRequests (User user){
+       return userRepository.getOne(user.getId()).getRequests();
     }
 }

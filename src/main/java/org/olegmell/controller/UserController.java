@@ -40,14 +40,12 @@ public class UserController {
     @GetMapping("/myrequests")
     public String userRequests (
             @AuthenticationPrincipal User currentUser,
-            Model model,
-            @RequestParam(required = false) Request request//Request request
+            Model model
     ) {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Set<Request> requests = currentUser.getRequests();
+        Set<Request> requests = userService.getUserRequests(currentUser);
         model.addAttribute("status", requestStatus);
         model.addAttribute("requests", requests);
-        model.addAttribute("request", request);
 
         return "userRequests";
     }
