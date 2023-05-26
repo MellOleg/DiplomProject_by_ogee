@@ -1,24 +1,22 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.Request;
-import org.olegmell.domain.Role;
-import org.olegmell.domain.Statuses;
+import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
 import org.olegmell.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -26,11 +24,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
-public class MainController {
+public class HomeController {
     @Autowired
     private RequestRepository requestRepository;
 
@@ -49,9 +45,10 @@ public class MainController {
         return "greeting";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/home")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestRepository.findAll();
+        Iterable<Status> requestStatus = statusRepository.findAll();
 
         if (filter != null && !filter.isEmpty()) {
             requests = requestRepository.findByTag(filter);
@@ -61,20 +58,22 @@ public class MainController {
 
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);
+        model.addAttribute("status", requestStatus);
 
-        return "main";
+        return "home";
     }
 
-    @PostMapping("/main")
+    @PostMapping(path ="/home", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public String add(
             @AuthenticationPrincipal User user,
             @Valid Request request,
             BindingResult bindingResult,
             Model model,
-            @RequestParam("file")MultipartFile file)
+            @RequestParam("file")MultipartFile file,
+            @RequestParam("requestStatus")Integer statusId)
             throws IOException {
         request.setAuthor(user);
-
+        request.setStatus(statusRepository.getOne(statusId));
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
@@ -87,12 +86,13 @@ public class MainController {
         }
 
         Iterable<Request> requests = requestRepository.findAll();
+        Iterable<Status> requestStatus = statusRepository.findAll();
 
         model.addAttribute("requests", requests);
+        model.addAttribute("status", requestStatus);
 
         return "requestEditAdmin"; //in second version: return main
     }
-
     private void saveFile(Request request, MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
@@ -108,61 +108,4 @@ public class MainController {
         }
     }
 
-
-    
-    @GetMapping("/user-requests/{user}")
-    public String userRequests (
-            @AuthenticationPrincipal User currentUser,
-            @PathVariable User user,  //надо подправить на RequestBody
-            Model model,
-            @RequestParam(required = false) Request request//Request request
-    ) {
-        Set<Request> requests = user.getRequests();
-        model.addAttribute("requests", requests);
-        model.addAttribute("request", request);
-        model.addAttribute("isCurrentUser", currentUser.equals(user));
-        return "userRequests";
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/del-user-requests/{user}")
-    public String deleteRequest(
-            @PathVariable Long user,
-            @RequestParam("request") Integer requestId
-    ) throws IOException {
-
-        requestRepository.deleteById(requestId);
-
-        return "redirect:/main";
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/user-requests/{user}")
-    public String updateRequest(
-
-            @PathVariable Long user,
-            Model model,
-            @RequestParam("id") Request request,
-            @RequestParam("text") String text,
-            @RequestParam("status") String status,
-            @RequestParam("tag") String tag,
-            @RequestParam("file")MultipartFile file
-    ) throws IOException {
-        if (!StringUtils.isEmpty(request)){
-            if (!StringUtils.isEmpty(text)){
-                request.setText(text);
-            }
-            if(!StringUtils.isEmpty(tag)){
-                request.setTag(tag);
-            }
-            if(!StringUtils.isEmpty(status)){
-                request.setStatus(status);
-            }
-
-            saveFile(request, file);
-            requestRepository.save(request);
-        }
-
-        return "redirect:/user-requests/" + user;
-    }
 }

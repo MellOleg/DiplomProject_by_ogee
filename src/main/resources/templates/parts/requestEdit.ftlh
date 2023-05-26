@@ -1,9 +1,5 @@
 <#include "security.ftlh">
 
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Добавить объявление
-</a>
-<div class="collapse <#if request??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -28,18 +24,32 @@
 
             <div class="form-group">
                 <#if isAdmin>
-                    <input type="text" class="form-control" name="status" value="<#if request??>${request.status}</#if>" />
+                    <label for="requestStatus">Выберите статус</label>
+                        <select class="form-control" id="requestStatus" name="requestStatus">
+                            <#list status as requestStatus>
+                                <option value="${requestStatus.id}">
+                                    ${requestStatus.name}
+                                </option>
+                            </#list>
+                        </select>
                 </#if>
+                    <select hidden class="form-control" id="requestStatus" name="requestStatus">
+                        <#list status as requestStatus>
+                            <option value="${requestStatus.id}">
+                                ${requestStatus.name}
+                            </option>
+                        </#list>
+                    </select>
             </div>
+
             <div class="custom-file">
                 <input type="file" name="file" id="customFile">
                 <label class="custom-file-label" for="customFile">Выбрать файл</label>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" /></br>
-            <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if>" /></br>
+            <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if> " /></br>
             <div class="form-group mt-3">
                 <button type="submit" class="btn btn-primary ">Сохранить</button>
             </div>
         </form>
     </div>
-</div>

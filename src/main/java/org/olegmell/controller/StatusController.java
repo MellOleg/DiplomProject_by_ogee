@@ -1,7 +1,9 @@
 package org.olegmell.controller;
 
-import org.olegmell.domain.Statuses;
+import org.apache.velocity.exception.ResourceNotFoundException;
+import org.olegmell.domain.Status;
 import org.olegmell.repository.StatusRepository;
+import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -12,16 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/statuses")
+@RequestMapping("/status")
 public class StatusController {
+
+    private final StatusService statusService;
+
     @Autowired
-    private StatusRepository statusRepository;
+    public StatusController(StatusService statusService) {
+        this.statusService = statusService;
+    }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String statusList(Model model){
-        Iterable<Statuses> statusesIterable = statusRepository.findAll();
-        model.addAttribute("statusesIterable", statusesIterable);
+        Iterable<Status> statusesIterable = statusService.getAllStatuses();
+        model.addAttribute("statusIterable", statusesIterable);
         return "statusList";
     }
 
@@ -35,8 +42,16 @@ public class StatusController {
     @PostMapping("/add")
     public String addStatusPost(@RequestParam String statusName,
                                  Model model) {
-        Statuses statuses = new Statuses(statusName);
-        statusRepository.save(statuses);
-        return "redirect:/statuses";
+        Status status = new Status(statusName);
+        statusService.createStatus(status);
+        return "redirect:/status";
+    }
+
+    public String getStatusName (int Id){
+        return statusService.getStatusName(Id);
+    }
+
+    public Status getStatus(int Id){
+        return statusService.getStatusById(Id);
     }
 }

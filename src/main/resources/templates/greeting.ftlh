@@ -42,4 +42,20 @@
         </div>
     </form>
 
+
+      <div class="container">
+        <h3>Form with Select Field</h3>
+        <form action="/submit-form" method="POST">
+          <div class="form-group">
+            <label for="statusSelect">Status:</label>
+            <select class="form-control" id="statusSelect" name="status">
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
 </@c.page>

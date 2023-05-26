@@ -1,7 +1,11 @@
 package org.olegmell.repository;
 
-import org.olegmell.domain.Statuses;
-import org.springframework.data.repository.CrudRepository;
+import org.olegmell.domain.Status;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StatusRepository extends CrudRepository<Statuses,Integer> {
+import java.util.List;
+
+public interface StatusRepository extends JpaRepository<Status, Integer> {
+    Status findFirstByName (String name);
+
 }
