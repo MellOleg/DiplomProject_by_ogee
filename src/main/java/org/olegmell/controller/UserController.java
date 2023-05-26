@@ -37,19 +37,15 @@ public class UserController {
         return "userList";
     }
 
-    @GetMapping("/myrequests/{user}")
+    @GetMapping("/myrequests")
     public String userRequests (
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user,  //надо подправить на RequestBody
-            Model model,
-            @RequestParam(required = false) Request request//Request request
+            Model model
     ) {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Set<Request> requests = user.getRequests();
+        Set<Request> requests = userService.getUserRequests(currentUser);
         model.addAttribute("status", requestStatus);
         model.addAttribute("requests", requests);
-        model.addAttribute("request", request);
-        model.addAttribute("isCurrentUser", currentUser.equals(user));
 
         return "home";
     }
