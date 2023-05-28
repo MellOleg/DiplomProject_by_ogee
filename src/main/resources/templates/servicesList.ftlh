@@ -1,6 +1,13 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
+    <li class="nav-item">
+        <a class="nav-link" href="/services/add">Добавить услугу</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/services/add">Добавить услугу</a>
+    </li>
+
     <table class="table">
         <thead>
         <tr>
@@ -16,9 +23,7 @@
             </#list>
         </tbody>
     </table>
-    <li class="nav-item">
-        <a class="nav-link" href="/services/add">Добавить услугу</a>
-    </li>
+
     <#list servicesIterable as service>
         <br><tr>
         <td>id: ${service.id}</td>

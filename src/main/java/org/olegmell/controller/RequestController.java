@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -104,7 +103,7 @@ public class RequestController {
         model.addAttribute("filter", filter);
         model.addAttribute("status", requestStatus);
 
-        return "createRequest";
+        return "createOrEditRequest";
     }
 
     @PostMapping(path ="/create", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
@@ -135,5 +134,40 @@ public class RequestController {
         return "userRequests" ;
     }
 
+    @GetMapping("/{requestId}/edit")
+    public String updateRequest(@PathVariable Integer requestId, Model model) {
+        Iterable<Status> requestStatus = statusService.getAllStatuses();
 
+        Request request = requestService.getRequestById(requestId);
+
+        model.addAttribute("request", request);
+        model.addAttribute("status", requestStatus);
+
+        return "createOrEditRequest";
+    }
+
+    @PostMapping(path="/{requestId}/edit", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public String updateRequest(
+            @AuthenticationPrincipal User user,
+            @Valid Request request,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("file")MultipartFile file,
+            @RequestParam("requestStatus")Integer statusId)
+            throws IOException {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("request", request);
+        } else {
+            saveFile(request, file);
+            model.addAttribute("request", null);
+            Integer newRequestId = requestService.createRequest(request, statusId, user);
+        }
+        Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Status> requestStatus = statusService.getAllStatuses();
+        model.addAttribute("requests", requests);
+        model.addAttribute("status", requestStatus);
+        return "userRequests" ;
+    }
 }
