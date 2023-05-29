@@ -13,11 +13,10 @@ public class PerformingOrganisation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String performingName;
-    private String performingEmail;
-    private int performingNumber;
-    private String performingAddress;
-
+    private String organisationName;
+    private String organisationEmail;
+    private int organisationPhoneNumber;
+    private String organisationAddress;
 
 
     @OneToOne(fetch = FetchType.LAZY)

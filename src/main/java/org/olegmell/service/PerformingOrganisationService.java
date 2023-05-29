@@ -13,6 +13,9 @@ public class PerformingOrganisationService {
     @Autowired
     private PerformingOrganisationRepository organisationRepository;
 
+    @Autowired
+    private ServicesService servicesService;
+
     @Autowired PerformingOrganisationService(PerformingOrganisationRepository organisationRepository){
         this.organisationRepository = organisationRepository;
     }
@@ -21,7 +24,11 @@ public class PerformingOrganisationService {
         return organisationRepository.findAll();
     }
 
-    public void createOrganisation(String performingName){
-
+    public void createOrganisation(PerformingOrganisation performingOrganisation,
+                                   Integer serviceId){
+        performingOrganisation.setServices(servicesService.getServicesById(serviceId));
+        PerformingOrganisation organisation = organisationRepository.save(performingOrganisation);
     }
+
+
 }

@@ -15,7 +15,8 @@ public class RequestService{
     @Autowired
     private RequestRepository requestRepository;
 
-    @Autowired StatusService statusService;
+    @Autowired
+    StatusService statusService;
 
     @Autowired
     public RequestService(RequestRepository requestRepository) {

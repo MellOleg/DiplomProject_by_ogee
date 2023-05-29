@@ -5,7 +5,7 @@
         <a class="nav-link" href="/services/add">Добавить услугу</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/services/add">Добавить услугу</a>
+        <a class="nav-link" href="/organisation/add">Добавить организацию</a>
     </li>
 
     <table class="table">
