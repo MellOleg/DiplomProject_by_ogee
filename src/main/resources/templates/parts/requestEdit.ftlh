@@ -21,6 +21,17 @@
                 </#if>
             </div>
 
+            <div class="form-group">
+                <label for="requestStatus">Выберите услугу</label>
+                <select class="form-control" id="requestStatus" name="requestServices">
+                    <#list services as requestServices>
+                        <option value="${requestServices.id}">
+                            ${requestServices.service_name}
+                        </option>
+                    </#list>
+                </select>
+            </div>
+
 
             <div class="form-group">
                 <#if isAdmin>

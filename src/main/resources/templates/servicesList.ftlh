@@ -1,11 +1,19 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
+    <li class="nav-item">
+        <a class="nav-link" href="/services/add">Добавить услугу</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/organisation/add">Добавить организацию</a>
+    </li>
+
     <table class="table">
         <thead>
         <tr>
             <th scope="col">id</th>
-            <th scope="col">ServiceName</th>
+            <th scope="col">Услуга</th>
+            <th scope="col">Исполняющая организация</th>
         </tr>
         </thead>
         <tbody>
@@ -13,12 +21,11 @@
         <tr>
             <td>${service.id}</td>
             <td>${service.service_name}</td>
+            <td><#list organisationIterable as organisation>${organisation.organisationName}</#list></td>
             </#list>
         </tbody>
     </table>
-    <li class="nav-item">
-        <a class="nav-link" href="/services/add">Добавить услугу</a>
-    </li>
+
     <#list servicesIterable as service>
         <br><tr>
         <td>id: ${service.id}</td>
@@ -48,7 +55,7 @@
         <option value="">Выберите тип услуги</option>
         <#list servicesIterable as service>
             <option type="text" value="${service.service_name}">
-                <#if service.id == service.id>${service.service_name}</#if>
+                ${service.service_name}
             </option>
         </#list>
     </select>

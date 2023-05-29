@@ -34,7 +34,7 @@
                     <div class="dropdown-menu">
                         <button class="dropdown-item" type="button">
                             <li class="nav-item">
-                                <a class="nav-link" href="/services">Услуги</a>
+                                <a class="nav-link" href="/services">Услуги и исполнители</a>
                             </li>
                         </button>
                         <button class="dropdown-item" type="button">

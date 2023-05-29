@@ -4,7 +4,7 @@
     <#if isAdmin>
 
     </#if>
-    <#include "parts/requestEdit.ftlh">
+
     <#include "parts/requestList.ftlh">
 
 </@c.page>

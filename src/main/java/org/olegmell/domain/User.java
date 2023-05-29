@@ -25,18 +25,7 @@ public class User implements UserDetails {
 
     private boolean active;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 
     @Email(message = "Не правильно введена почта")
     @NotBlank(message = "Почта не должна быть пустой")
@@ -46,7 +35,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role user_role;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Request> requests;
 
     public boolean isAdmin(){

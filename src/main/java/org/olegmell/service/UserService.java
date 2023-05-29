@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
     public void saveUser(User user, String username, Map<String, String> form) {
         user.setUsername(username);
 
-        user.setUser_role(Role.USER);
+
 
         userRepository.save(user);
     }

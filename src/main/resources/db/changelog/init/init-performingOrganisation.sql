@@ -1,9 +1,9 @@
 create table performing_organisation (
     id serial not null,
-    performing_address varchar(255),
-    performing_email varchar(255),
-    performing_name varchar(255),
-    performing_number int4 not null,
+    organisation_address varchar(255),
+    organisation_email varchar(255),
+    organisation_name varchar(255),
+    organisation_phone_number int4 not null,
     service_id int4,
     primary key (id));
 

@@ -16,13 +16,16 @@
                             <#if request.status == requestStatus>Статус - ${requestStatus.name}</#if>
                         </option>
                     </#list>
+                    <!--
+                    
+                    -->
                 </#if>
             </div>
             <div class="card-footer text-muted">
                 <#if isAdmin>
                     <a href="/user/list/${request.author.id}">${request.authorName}</a><!-- authorName -->
 
-                    <a class="btn btn-primary" href="/request/user-requests/${request.author.id}?request=${request.id}">
+                    <a class="btn btn-primary" href="/request/${request.id}/edit">
                         Изменить
                     </a>
                     <a class="btn btn-warning" href="/request/delete/${request.author.id}?request=${request.id}">
