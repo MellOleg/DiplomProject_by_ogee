@@ -12,7 +12,8 @@
         <thead>
         <tr>
             <th scope="col">id</th>
-            <th scope="col">ServiceName</th>
+            <th scope="col">Услуга</th>
+            <th scope="col">Исполняющая организация</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
         <tr>
             <td>${service.id}</td>
             <td>${service.service_name}</td>
+            <td><#list organisationIterable as organisation>${organisation.organisationName}</#list></td>
             </#list>
         </tbody>
     </table>
@@ -53,7 +55,7 @@
         <option value="">Выберите тип услуги</option>
         <#list servicesIterable as service>
             <option type="text" value="${service.service_name}">
-                <#if service.id == service.id>${service.service_name}</#if>
+                ${service.service_name}
             </option>
         </#list>
     </select>

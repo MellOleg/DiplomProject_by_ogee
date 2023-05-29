@@ -1,11 +1,13 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.Request;
+import org.olegmell.domain.Services;
 import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.StatusRepository;
 import org.olegmell.service.RequestService;
+import org.olegmell.service.ServicesService;
 import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +34,9 @@ public class RequestController {
 
     @Autowired
     StatusService statusService;
+
+    @Autowired
+    private ServicesService servicesService;
 
     @Autowired
     private RequestRepository requestRepository;
@@ -91,6 +96,7 @@ public class RequestController {
     @GetMapping("/create")
     public String createRequest(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
 
         if (filter != null && !filter.isEmpty()) {
@@ -99,6 +105,7 @@ public class RequestController {
             requests = requestService.getAllRequests();
         }
 
+        model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);
         model.addAttribute("status", requestStatus);
@@ -113,6 +120,7 @@ public class RequestController {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file")MultipartFile file,
+            @RequestParam("requestServices") Integer serviceId,
             @RequestParam("requestStatus")Integer statusId)
             throws IOException {
         if (bindingResult.hasErrors()) {
@@ -122,12 +130,14 @@ public class RequestController {
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);
-            Integer newRequestId = requestService.createRequest(request, statusId, user);
+            Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
         }
 
+        Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Request> requests = requestService.getAllRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
 
+        model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
 
@@ -137,9 +147,11 @@ public class RequestController {
     @GetMapping("/{requestId}/edit")
     public String updateRequest(@PathVariable Integer requestId, Model model) {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
+        Iterable<Services> requestServices = servicesService.getAllServices();
 
         Request request = requestService.getRequestById(requestId);
 
+        model.addAttribute("services", requestServices);
         model.addAttribute("request", request);
         model.addAttribute("status", requestStatus);
 
@@ -153,6 +165,7 @@ public class RequestController {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file")MultipartFile file,
+            @RequestParam("requestService")Integer serviceId,
             @RequestParam("requestStatus")Integer statusId)
             throws IOException {
         if (bindingResult.hasErrors()) {
@@ -162,10 +175,14 @@ public class RequestController {
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);
-            Integer newRequestId = requestService.createRequest(request, statusId, user);
+            Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
         }
+
+        Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Request> requests = requestService.getAllRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
+
+        model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
         return "userRequests" ;

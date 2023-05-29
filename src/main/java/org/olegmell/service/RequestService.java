@@ -19,13 +19,17 @@ public class RequestService{
     StatusService statusService;
 
     @Autowired
+    private ServicesService servicesService;
+
+    @Autowired
     public RequestService(RequestRepository requestRepository) {
         this.requestRepository = requestRepository;
     }
 
-    public Integer createRequest (Request request, Integer statusId, User user){
+    public Integer createRequest (Request request, Integer statusId, Integer serviceId, User user){
         request.setAuthor(user);
         request.setStatus(statusService.getStatusById(statusId));
+        request.setServices(servicesService.getServicesById(serviceId));
         Request newRequest =  requestRepository.save(request);
         return newRequest.getId();
     }
