@@ -2,8 +2,6 @@ package org.olegmell.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.olegmell.controller.StatusController;
-import org.olegmell.service.StatusService;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,15 +20,15 @@ public class Request {
     @NotBlank(message = "Пожалуйста, введите тэг")
     private String tag;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "user_id")
     private User author;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_id")
-    private Services services;
+    @ManyToOne
+    @JoinColumn(name = "service_id", nullable=false)
+    private Services service;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     private Status status;
 

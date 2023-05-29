@@ -44,6 +44,7 @@
                             </#list>
                         </select>
                 </#if>
+                <#if !isAdmin>
                     <select hidden class="form-control" id="requestStatus" name="requestStatus">
                         <#list status as requestStatus>
                             <option value="${requestStatus.id}">
@@ -51,6 +52,7 @@
                             </option>
                         </#list>
                     </select>
+                 </#if>
             </div>
 
             <div class="custom-file">

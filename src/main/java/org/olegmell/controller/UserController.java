@@ -1,7 +1,6 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.Request;
-import org.olegmell.domain.Role;
 import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.service.StatusService;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -86,5 +86,16 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(password));
 
         return "redirect:/user/profile";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/delete/{user}")
+    public String deleteUser(
+            @PathVariable Integer user
+    ) throws IOException {
+
+        userService.deleteUserById(user);
+
+        return "redirect:/home";
     }
 }

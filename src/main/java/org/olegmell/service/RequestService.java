@@ -3,12 +3,10 @@ package org.olegmell.service;
 import org.olegmell.domain.Request;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
-import org.olegmell.repository.ServicesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Service
 public class RequestService{
@@ -29,7 +27,7 @@ public class RequestService{
     public Integer createRequest (Request request, Integer statusId, Integer serviceId, User user){
         request.setAuthor(user);
         request.setStatus(statusService.getStatusById(statusId));
-        request.setServices(servicesService.getServicesById(serviceId));
+        request.setService(servicesService.getServicesById(serviceId));
         Request newRequest =  requestRepository.save(request);
         return newRequest.getId();
     }
