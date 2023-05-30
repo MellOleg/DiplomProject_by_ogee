@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,8 +16,8 @@ public class Services {
 
     private String service_name;
 
-    @OneToOne(mappedBy = "services", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
-    private Request request;
+    @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
+    private Set<Request> requests;
 
     @OneToOne(mappedBy = "services", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
     private PerformingOrganisation performingOrganisation;

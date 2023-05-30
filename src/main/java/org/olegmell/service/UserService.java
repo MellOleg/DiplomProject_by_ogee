@@ -108,4 +108,8 @@ public class UserService implements UserDetailsService {
     public Set<Request> getUserRequests (User user){
        return userRepository.getOne(user.getId()).getRequests();
     }
+
+    public void deleteUserById (Integer userId){
+        userRepository.deleteById(userId);
+    }
 }
