@@ -8,6 +8,7 @@ import org.olegmell.service.RequestService;
 import org.olegmell.service.ServicesService;
 import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/request")
@@ -32,6 +35,9 @@ public class RequestController {
 
     @Autowired
     private ServicesService servicesService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/request")
@@ -71,19 +77,6 @@ public class RequestController {
             @RequestParam("requestServices") Integer serviceId,
             @RequestParam("requestStatus")Integer statusId)
             throws IOException {
-        System.out.println("request Text " + request.getText());
-        System.out.println("request Tag " + request.getTag());
-        System.out.println("has errors " + bindingResult.hasErrors());
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-            model.mergeAttributes(errorsMap);
-            model.addAttribute("request", request);
-        } else {
-            ControllerUtils.saveFile(request, file);
-            model.addAttribute("request", null);
-            Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
-        }
-
         Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Request> requests = requestService.getAllRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
@@ -92,7 +85,18 @@ public class RequestController {
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
 
-        return "createOrEditRequest" ;
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("request", request);
+            return "createOrEditRequest" ;
+        } else {
+            saveFile(request, file);
+            model.addAttribute("request", null);
+            Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
+        }
+
+        return "userRequests" ;
     }
 
     @GetMapping("/{requestId}/edit")
@@ -124,7 +128,7 @@ public class RequestController {
             model.mergeAttributes(errorsMap);
             model.addAttribute("request", request);
         } else {
-            ControllerUtils.saveFile(request, file);
+            saveFile(request, file);
             model.addAttribute("request", null);
             Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
         }
@@ -137,5 +141,20 @@ public class RequestController {
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
         return "userRequests" ;
+    }
+
+    private void saveFile(Request request, MultipartFile file) throws IOException {
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            request.setFilename(resultFilename);
+        }
     }
 }

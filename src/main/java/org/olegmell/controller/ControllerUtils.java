@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ControllerUtils {
 
     @Value("${upload.path}")
-    private static String uploadPath;
+    private String uploadPath;
     static Map<String, String> getErrors(BindingResult bindingResult) {
         Collector<FieldError, ?, Map<String, String>> collector = Collectors.toMap(
                 fieldError -> fieldError.getField() + "Error",
@@ -25,7 +25,7 @@ public class ControllerUtils {
         return bindingResult.getFieldErrors().stream().collect(collector);
     }
 
-    static void saveFile(Request request, MultipartFile file) throws IOException {
+    public void saveFile(Request request, MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
