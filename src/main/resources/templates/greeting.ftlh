@@ -2,60 +2,44 @@
 
 <@c.page>
     <h5>Вас приветствует сервис по резервированию услуг жильцов многоквартирных домов</h5></br>
-    <a>Здесь вы можете оставить свои объявления касаемо данной тематики</a></br>
+    <a>Здесь вы можете оставить свои заявки касаемо данной тематики</a></br>
     <a>Обратная связь: example@example.com</a>
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-            Dropdown
-        </button>
-        <div class="dropdown-menu">
-            <button class="dropdown-item" type="button">Action</button>
-            <button class="dropdown-item" type="button">Another action</button>
-            <button class="dropdown-item" type="button">Something else here</button>
-        </div>
+    <br>
+    <br>
+    <h5>Правила* Обязательно!</h5>
+    <h>Для комфортного использования сервиса необходиом ознакомиться с правилами подачи заявки, приведенными ниже:</h><br>
+    <h>1.1 Текст заявок, подлежащих публикации, должен быть изложен на русском языке.</h><br>
+    <h>1.2 Заявка содержит вопрос в отношении одного объекта</h><br>
+    <h>1.3 Для публикации принимаются фотографии в формате *jpg, *png и иных аналогичных форматов размером не более 2 Мб</h><br>
+    <h>1.4 Не допускается публикация фотографий, содержащих изображения людей, имеющих разрешение и качество, недостаточное
+        для различения объектов и выполненных на них работ, фотографий, требующих редактирования, в частности переворачивания, кадрирования или приближения.</h><br>
+    <h>1.5 В одной заявке пользователь может направить не более одной фотографии.</h><br>
+    <h>Прайслист для предоставления тех или иных услуг вы можете просмотреть <a href="pricelist.ftlh">Здесь<a>.</h>
+    <br>
+    <br>
+    <h>Заявка так же может быть удалена по седующим причинам:</h><br>
+    <h>2.1 Тематика заявок не относится к сфере жилищно-коммунального хозяйства и городского хозяйства Республики Беларусь</h><br>
+    <h>2.2 Заявка содержит вопрос в отношении одного и того же объекта, ответ на который уже был дан ранее.</h><br>
+    <h>2.3 Заявка не содержит конкретных фактов, на основании которых возможно провести проверку/установить факт невыполнения/некачественного выполнения заявки.</h><br>
+    <h>2.4 Заявка содержит нецензурную лексику, либо ее производные.</h><br>
+    <h>2.5 Фотография не отвечает требованиям пунктов 1.3 и 1.4 настоящих Правил</h><br>
+    <h>2.6 Заявка содержит описание нескольких проблем по разным темам.</h><br><br>
+
+
+    <h>Администрация сервиса оставляет за собой право на окончательную интрепритацию правил.</h>
+
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+                <li class="nav-item"><a href="mailto:titul621.a.mell@gmial.com" class="nav-link px-2 text-body-secondary">Связаться с нами</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">&copy; 2023 Company, Inc</p>
+        </footer>
     </div>
-    <form>
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-    </form>
 
-
-      <div class="container">
-        <h3>Form with Select Field</h3>
-        <form action="/submit-form" method="POST">
-          <div class="form-group">
-            <label for="statusSelect">Status:</label>
-            <select class="form-control" id="statusSelect" name="status">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
 
 </@c.page>

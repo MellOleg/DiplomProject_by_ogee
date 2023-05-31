@@ -1,11 +1,13 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.Request;
+import org.olegmell.domain.Services;
 import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
 import org.olegmell.repository.StatusRepository;
+import org.olegmell.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -36,6 +38,9 @@ public class HomeController {
     @Autowired
     private StatusRepository statusRepository;
 
+    @Autowired
+    private ServicesService servicesService;
+
     @Value("${upload.path}")
     private String uploadPath;
     private User user;
@@ -49,13 +54,15 @@ public class HomeController {
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestRepository.findAll();
         Iterable<Status> requestStatus = statusRepository.findAll();
+        Iterable<Services> requestServices = servicesService.getAllServices();
+
 
         if (filter != null && !filter.isEmpty()) {
             requests = requestRepository.findByTag(filter);
         } else {
             requests = requestRepository.findAll();
         }
-
+        model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);
         model.addAttribute("status", requestStatus);

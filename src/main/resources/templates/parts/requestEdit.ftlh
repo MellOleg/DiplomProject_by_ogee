@@ -22,8 +22,8 @@
             </div>
 
             <div class="form-group">
-                <label for="requestStatus">Выберите услугу</label>
-                <select class="form-control" id="requestStatus" name="requestServices">
+                <label for="requestServices">Выберите услугу</label>
+                <select class="form-control" id="requestServices" name="requestServices">
                     <#list services as requestServices>
                         <option value="${requestServices.id}">
                             ${requestServices.service_name}
