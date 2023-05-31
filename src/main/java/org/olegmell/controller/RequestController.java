@@ -95,9 +95,15 @@ public class RequestController {
             model.addAttribute("request", null);
             Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
         }
-
         return "userRequests" ;
     }
+    @GetMapping("/{requestId}/delete")
+    public String deleteRequest(
+            @PathVariable Integer requestId){
+        requestService.deleteById(requestId);
+        return "home";
+    }
+
 
     @GetMapping("/{requestId}/edit")
     public String updateRequest(@PathVariable Integer requestId, Model model) {
@@ -120,7 +126,7 @@ public class RequestController {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file")MultipartFile file,
-            @RequestParam("requestService")Integer serviceId,
+            @RequestParam("requestServices")Integer serviceId,
             @RequestParam("requestStatus")Integer statusId)
             throws IOException {
         if (bindingResult.hasErrors()) {
@@ -137,13 +143,14 @@ public class RequestController {
         Iterable<Request> requests = requestService.getAllRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
 
-        model.addAttribute("services", requestServices);
+        model.addAttribute("services", requestServices );
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);
         return "userRequests" ;
     }
 
-    private void saveFile(Request request, MultipartFile file) throws IOException {
+    private void saveFile(Request request, MultipartFile file)
+            throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 

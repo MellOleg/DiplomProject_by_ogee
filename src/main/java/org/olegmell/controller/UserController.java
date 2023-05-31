@@ -1,8 +1,11 @@
 package org.olegmell.controller;
 
+import liquibase.pro.packaged.A;
 import org.olegmell.domain.Request;
+import org.olegmell.domain.Services;
 import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
+import org.olegmell.service.ServicesService;
 import org.olegmell.service.StatusService;
 import org.olegmell.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class UserController {
     private StatusService statusService;
 
     @Autowired
+    private ServicesService servicesService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -42,8 +48,10 @@ public class UserController {
             @AuthenticationPrincipal User currentUser,
             Model model
     ) {
+        Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
         Set<Request> requests = userService.getUserRequests(currentUser);
+        model.addAttribute("services", requestServices);
         model.addAttribute("status", requestStatus);
         model.addAttribute("requests", requests);
 

@@ -16,9 +16,11 @@
                             <#if request.status == requestStatus>Статус - ${requestStatus.name}</#if>
                         </option>
                     </#list>
-                    <!--
-                    
-                    -->
+                    <#list services as requestServices>
+                        <option value="${requestServices.id}">
+                            <#if request.service == requestServices>Услуга - ${requestServices.service_name}</#if>
+                        </option>
+                    </#list>
                 </#if>
             </div>
             <div class="card-footer text-muted">
@@ -28,7 +30,7 @@
                     <a class="btn btn-primary" href="/request/${request.id}/edit">
                         Изменить
                     </a>
-                    <a class="btn btn-warning" href="/request/delete/${request.author.id}?request=${request.id}">
+                    <a class="btn btn-warning" href="/request/${request.id}/delete">
                         Удалить
                     </a>
                 </#if>
