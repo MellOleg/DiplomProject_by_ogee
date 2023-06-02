@@ -19,7 +19,7 @@ public class PerformingOrganisation {
     private String organisationAddress;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "service_id")
     private Services services;
 

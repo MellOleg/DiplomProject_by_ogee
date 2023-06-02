@@ -19,8 +19,8 @@ public class Services {
     @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
     private Set<Request> requests;
 
-    @OneToOne(mappedBy = "services", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
-    private PerformingOrganisation performingOrganisation;
+    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY)
+    private Set<PerformingOrganisation> performingOrganisation;
     //one to many
 
 

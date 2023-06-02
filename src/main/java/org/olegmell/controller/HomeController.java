@@ -1,12 +1,10 @@
 package org.olegmell.controller;
 
-import org.olegmell.domain.Request;
-import org.olegmell.domain.Services;
-import org.olegmell.domain.Status;
-import org.olegmell.domain.User;
+import org.olegmell.domain.*;
 import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
 import org.olegmell.repository.StatusRepository;
+import org.olegmell.service.PerformingOrganisationService;
 import org.olegmell.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +34,9 @@ public class HomeController {
     private ServicesRepository servicesRepository;
 
     @Autowired
+    private PerformingOrganisationService organisationService;
+
+    @Autowired
     private StatusRepository statusRepository;
 
     @Autowired
@@ -48,6 +49,16 @@ public class HomeController {
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
         return "greeting";
+    }
+
+    @GetMapping("/priceList")
+    private String priceServiceList(Model model){
+        Iterable<Services> servicesIterable = servicesService.getAllServices();
+        Iterable<PerformingOrganisation> organisationIterable = organisationService.getAllOrganisation();
+
+        model.addAttribute("organisationIterable", organisationIterable);
+        model.addAttribute("servicesIterable", servicesIterable);
+        return "priceList";
     }
 
     @GetMapping("/home")

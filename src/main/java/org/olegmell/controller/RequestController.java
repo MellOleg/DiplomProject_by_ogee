@@ -68,7 +68,7 @@ public class RequestController {
     }
 
     @PostMapping(path ="/create", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public String createrequest(
+    public String createRequest(
             @AuthenticationPrincipal User user,
             @Valid Request request,
             BindingResult bindingResult,
@@ -99,9 +99,17 @@ public class RequestController {
     }
     @GetMapping("/{requestId}/delete")
     public String deleteRequest(
-            @PathVariable Integer requestId){
+            @PathVariable Integer requestId, Model model){
+        Iterable<Services> requestServices = servicesService.getAllServices();
+        Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Status> requestStatus = statusService.getAllStatuses();
+
+        model.addAttribute("services", requestServices);
+        model.addAttribute("requests", requests);
+        model.addAttribute("status", requestStatus);
+
         requestService.deleteById(requestId);
-        return "home";
+        return "redirect:/home";
     }
 
 

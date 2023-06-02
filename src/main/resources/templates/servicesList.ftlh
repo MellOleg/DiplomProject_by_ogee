@@ -11,7 +11,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">id</th>
             <th scope="col">Услуга</th>
             <th scope="col">Исполняющая организация</th>
         </tr>
@@ -19,9 +18,11 @@
         <tbody>
         <#list servicesIterable as service>
         <tr>
-            <td>${service.id}</td>
             <td>${service.service_name}</td>
-            <td><#list organisationIterable as organisation>${organisation.organisationName}</#list></td>
+            <td><#list organisationIterable as organisation>
+                    <#if service.id == organisation.services.id>${organisation.organisationName} |</#if>
+                </#list>
+            </td>
             </#list>
         </tbody>
     </table>

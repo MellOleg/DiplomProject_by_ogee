@@ -39,11 +39,6 @@
                         </button>
                         <button class="dropdown-item" type="button">
                             <li class="nav-item">
-                                <a class="nav-link" href="/statuses">Статусы</a>
-                            </li>
-                        </button>
-                        <button class="dropdown-item" type="button">
-                            <li class="nav-item">
                                 <a class="nav-link" href="/user">Список пользователей</a>
                             </li>
                         </button>

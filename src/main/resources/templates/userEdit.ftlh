@@ -7,7 +7,7 @@
         <input type="text" name="username" value="${user.username}">
         <#list users as user>
             <div>
-
+                <label><input type="chekbox"> </label>
             </div>
         </#list>
         <input type="hidden" value="${user.id}" name="userId">
