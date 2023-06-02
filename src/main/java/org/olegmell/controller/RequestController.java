@@ -94,8 +94,9 @@ public class RequestController {
             saveFile(request, file);
             model.addAttribute("request", null);
             Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
+            return "redirect:/user/myrequests" ;
         }
-        return "userRequests" ;
+
     }
     @GetMapping("/{requestId}/delete")
     public String deleteRequest(

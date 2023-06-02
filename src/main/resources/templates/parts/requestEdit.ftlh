@@ -54,11 +54,20 @@
                     </select>
                  </#if>
             </div>
-
-            <div class="custom-file">
-                <input class="form-control" type="file" name="file" id="customFile">
-                <!--<input class="form-control" type="file" for="customFile">-->
-                <!--<label class="custom-file-label" for="customFile">Выбрать файл</label>-->
+			<div class="preview">
+				<#if !request??>
+                    <img id="imagePreview" src="" class="img-fluid">
+                <#elseif request.filename??>
+                    <img id="imagePreview" src="/img/${request.filename}" class="img-fluid">
+				<#elseif request.id??>
+				    <img id="imagePreview" src="" class="img-fluid">
+				<#else>
+					<img id="imagePreview" src="/img/placeholder-16-9.jpg" class="img-fluid">
+                </#if>
+			</div>
+            <div class="image-file">
+				<label class="image-file-label" for="imageInput">Выбрать файл</label>
+                <input class="form-control" type="file" name="file" accept="image/*" id="imageInput">
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" /></br>
             <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if> " /></br>
