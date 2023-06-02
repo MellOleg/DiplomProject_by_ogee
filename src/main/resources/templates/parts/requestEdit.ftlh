@@ -75,4 +75,12 @@
                 <button type="submit" class="btn btn-primary ">Сохранить</button>
             </div>
         </form>
+        <script type="text/javascript">
+        imageInput.onchange = evt => {
+              const [file] = imageInput.files
+              if (file) {
+                imagePreview.src = URL.createObjectURL(file)
+              }
+            }
+        </script>
     </div>
