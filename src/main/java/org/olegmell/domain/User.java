@@ -2,6 +2,8 @@ package org.olegmell.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -37,6 +39,14 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Request> requests;
+
+    @CreationTimestamp
+    @Column(name = "creation_date", updatable = false)
+    private Date createdTime;
+
+    @UpdateTimestamp
+    @Column(name = "last_modified")
+    private Date lastModifiedTime;
 
     public boolean isAdmin(){
         return user_role == Role.ADMIN;

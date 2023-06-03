@@ -8,6 +8,8 @@ create table request (
                          user_id int4,
                          status_id int4,
                          service_id int4,
+                         creation_date TIMESTAMP,
+                         last_modified TIMESTAMP,
                          primary key (id));
 
 create table status (
@@ -23,6 +25,8 @@ create table usr (
                      password varchar(255) not null ,
                      username varchar(255) not null ,
                      user_role varchar(255) not null,
+                     creation_date TIMESTAMP,
+                     last_modified TIMESTAMP,
                      primary key (id));
 
 create table services (
