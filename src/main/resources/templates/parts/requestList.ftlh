@@ -10,18 +10,8 @@
             <div class="m-2">
                 <span>${request.text}</span><br>
                 <i>#${request.tag}</i><br>
-                <#if request.text?? >
-                    <#list status as requestStatus>
-                        <option value="${requestStatus.id}">
-                            <#if request.status == requestStatus>Статус - ${requestStatus.name}</#if>
-                        </option>
-                    </#list>
-                    <#list services as requestServices>
-                        <option value="${requestServices.id}">
-                            <#if request.service == requestServices>Услуга - ${requestServices.service_name}</#if>
-                        </option>
-                    </#list>
-                </#if>
+                <span>Статус - ${request.status.name}</span><br>
+                <span>Услуга - ${request.service.service_name}</span><br>
             </div>
             <div class="card-footer text-muted">
                 <#if isAdmin>

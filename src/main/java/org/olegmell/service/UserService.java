@@ -105,7 +105,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public Set<Request> getUserRequests (User user){
+    public Iterable<Request> getUserRequests (User user){
        return userRepository.getOne(user.getId()).getRequests();
     }
 
