@@ -2,9 +2,13 @@ package org.olegmell.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 
 @Entity
@@ -34,6 +38,14 @@ public class Request {
 
     private String filename;
 
+    @CreationTimestamp
+    @Column(name = "creation_date", updatable = false)
+    private Date createdTime;
+
+    @UpdateTimestamp
+    @Column(name = "last_modified")
+    private Date lastModifiedTime;
+
     public Request() {
     }
 
@@ -47,14 +59,5 @@ public class Request {
     public String getAuthorName(){
         return author != null ? author.getUsername() : "<none>";
     }
-
-    //public String getStatus(){
-    //    if(status != null){
-    //        return status.getName() ;
-    //    }
-    //    else {
-    //        return "На рассмотрении";
-    //    }
-    //}
 
 }
