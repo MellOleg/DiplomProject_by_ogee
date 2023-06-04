@@ -5,7 +5,9 @@ import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
 import org.olegmell.repository.StatusRepository;
 import org.olegmell.service.PerformingOrganisationService;
+import org.olegmell.service.RequestService;
 import org.olegmell.service.ServicesService;
+import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -28,16 +30,13 @@ import java.util.UUID;
 @Controller
 public class HomeController {
     @Autowired
-    private RequestRepository requestRepository;
-
-    @Autowired
-    private ServicesRepository servicesRepository;
+    private RequestService requestService;
 
     @Autowired
     private PerformingOrganisationService organisationService;
 
     @Autowired
-    private StatusRepository statusRepository;
+    private StatusService statusService;
 
     @Autowired
     private ServicesService servicesService;
@@ -63,15 +62,15 @@ public class HomeController {
 
     @GetMapping("/home")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Request> requests = requestRepository.findAll();
-        Iterable<Status> requestStatus = statusRepository.findAll();
+        Iterable<Request> requests = requestService.getAllActiveRequests();
+        Iterable<Status> requestStatus = statusService.getAllStatuses();
         Iterable<Services> requestServices = servicesService.getAllServices();
 
 
         if (filter != null && !filter.isEmpty()) {
-            requests = requestRepository.findByTag(filter);
+            requests = requestService.searchByTag(filter);
         } else {
-            requests = requestRepository.findAll();
+            requests = requestService.getAllActiveRequests();
         }
         model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
@@ -79,51 +78,6 @@ public class HomeController {
         model.addAttribute("status", requestStatus);
 
         return "home";
-    }
-
-    @PostMapping(path ="/home", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public String add(
-            @AuthenticationPrincipal User user,
-            @Valid Request request,
-            BindingResult bindingResult,
-            Model model,
-            @RequestParam("file")MultipartFile file,
-            @RequestParam("requestStatus")Integer statusId)
-            throws IOException {
-        request.setAuthor(user);
-        request.setStatus(statusRepository.getOne(statusId));
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-
-            model.mergeAttributes(errorsMap);
-            model.addAttribute("request", request);
-        } else {
-            saveFile(request, file);
-            model.addAttribute("request", null);
-            requestRepository.save(request);
-        }
-
-        Iterable<Request> requests = requestRepository.findAll();
-        Iterable<Status> requestStatus = statusRepository.findAll();
-
-        model.addAttribute("requests", requests);
-        model.addAttribute("status", requestStatus);
-
-        return "requestEditAdmin"; //in second version: return main
-    }
-    private void saveFile(Request request, MultipartFile file) throws IOException {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-            request.setFilename(resultFilename);
-        }
     }
 
 }
