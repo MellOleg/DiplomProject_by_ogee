@@ -1,6 +1,23 @@
 body {
-    color: #113;
+  height: 100%;
 
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 14px;
+  color: #113;
+
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
 }
+
+.content{
+    flex: 1;
+    padding-bottom: 130px;
+    }
+.footer{
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    }
