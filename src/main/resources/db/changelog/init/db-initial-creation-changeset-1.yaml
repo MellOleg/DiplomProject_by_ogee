@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/init/init-performingOrganisation.sql
   - include:
       file: db/changelog/init/add-statuses-insert.sql
+  - include:
+      file: db/changelog/init/add-services-insert.sql
