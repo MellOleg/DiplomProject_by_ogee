@@ -109,6 +109,12 @@ public class UserService implements UserDetailsService {
        return userRepository.getOne(user.getId()).getRequests();
     }
 
+    public Iterable<Request> getActiveUserRequests (User user){
+        List<Request> userRequests = new ArrayList<>(userRepository.getOne(user.getId()).getRequests());
+        userRequests.removeIf(request -> request.getStatus().getId()==3);
+        return userRequests;
+    }
+
     public void deleteUserById (Integer userId){
         userRepository.deleteById(userId);
     }

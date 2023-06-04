@@ -50,7 +50,7 @@ public class UserController {
     ) {
         Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Iterable<Request> requests = userService.getUserRequests(currentUser);
+        Iterable<Request> requests = userService.getActiveUserRequests(currentUser);
         model.addAttribute("services", requestServices);
         model.addAttribute("status", requestStatus);
         model.addAttribute("requests", requests);

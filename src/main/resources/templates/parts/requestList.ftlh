@@ -17,10 +17,10 @@
                 <#if isAdmin>
                     <a href="/user/list/${request.author.id}">${request.authorName}</a><!-- authorName -->
 
-                    <a class="btn btn-primary" href="/request/${request.id}/edit">
+                    <a class="btn btn-primary" href="/request/edit/${request.id}">
                         Изменить
                     </a>
-                    <a class="btn btn-warning" href="/request/${request.id}/delete">
+                    <a class="btn btn-warning" href="/request/delete/${request.id}">
                         Удалить
                     </a>
                 </#if>
