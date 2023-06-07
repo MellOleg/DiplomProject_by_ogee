@@ -49,6 +49,4 @@ public class PerformingOrganisationController {
         organisationService.createOrganisation(performingOrganisation, serviceId);
         return "redirect:/services";
     }
-
-
 }

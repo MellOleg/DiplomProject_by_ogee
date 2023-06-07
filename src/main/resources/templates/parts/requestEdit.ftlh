@@ -1,5 +1,6 @@
 <#include "security.ftlh">
-
+<section class="main-block-requestEdit">
+    <div class="border-block-requestEdit">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -84,3 +85,5 @@
             }
         </script>
     </div>
+    </div>
+</section>
