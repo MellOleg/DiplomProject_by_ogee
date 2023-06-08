@@ -68,9 +68,7 @@
                     <li class="nav-item ml-4">
                         <a class="nav-link title" href="/" data-offset="90">Главная</a>
                     </li>
-                    <li class="nav-item ml-4">
-                        <a class="nav-link title" href="/home" data-offset="90">Заявки</a>
-                    </li>
+
                     <#if user??>
                     <li class="nav-item ml-4">
                         <a class="nav-link title" href="/user/myrequests" data-offset="90">Мои заявки</a>
@@ -88,7 +86,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/services">Сервисы и услуги</a>
                             <a class="dropdown-item" href="/user">Список пользователей</a>
-                            <a class="dropdown-item" href="../blog/blog-post.html">Заявки в ожидании</a>
+                            <a class="dropdown-item" href="/home">Заявки в ожидании</a>
                         </div>
                     </li>
                     </#if>
