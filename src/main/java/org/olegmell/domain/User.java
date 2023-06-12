@@ -27,8 +27,6 @@ public class User implements UserDetails {
 
     private boolean active;
 
-
-
     @Email(message = "Не правильно введена почта")
     @NotBlank(message = "Почта не должна быть пустой")
     private String email;

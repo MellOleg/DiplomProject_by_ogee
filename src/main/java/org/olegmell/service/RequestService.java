@@ -1,16 +1,14 @@
 package org.olegmell.service;
 
 import org.olegmell.domain.Request;
-import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
-import org.olegmell.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
+import java.util.Calendar;
 
 @Service
 public class RequestService{
@@ -36,12 +34,30 @@ public class RequestService{
         return newRequest.getId();
     }
 
+    public void updateRequest (Request request, Integer statusId, Integer serviceId){
+        Request existingRequest = requestRepository.getOne(request.getId());
+        existingRequest.setStatus(statusService.getStatusById(statusId));
+        existingRequest.setService(servicesService.getServicesById(serviceId));
+        existingRequest.setText(request.getText());
+        existingRequest.setFilename(request.getFilename());
+        if (statusId == 3){ existingRequest.setCompletedTime(Calendar.getInstance().getTime()); }
+
+        requestRepository.saveAndFlush(existingRequest);
+    }
+
     public Request getRequestById (Integer id){
         return requestRepository.getOne(id);
     }
 
-    public Iterable<Request> getAllRequests() {
-        return requestRepository.findAll();
+    public Iterable<Request> getAllActiveRequests() {
+        return requestRepository.findAllActiveRequests();
+    }
+    public Iterable<Request> getAllRequests(){
+        return requestRepository.findAll(Sort.by(Sort.Direction.ASC, "createdTime"));
+    }
+
+    public Iterable<Request> searchByTag(String tag){
+        return requestRepository.findByTag(tag);
     }
 
     public Iterable<Request> getAllByTag(String filter) {

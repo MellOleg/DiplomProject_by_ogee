@@ -42,12 +42,12 @@ public class RequestController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/request")
     public String requestAdminPage(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Request> requests = requestService.getAllActiveRequests();
 
         if (filter != null && !filter.isEmpty()) {
             requests = requestService.getAllByTag(filter);
         } else {
-            requests = requestService.getAllRequests();
+            requests = requestService.getAllActiveRequests();
         }
 
         model.addAttribute("requests", requests);
@@ -78,7 +78,7 @@ public class RequestController {
             @RequestParam("requestStatus")Integer statusId)
             throws IOException {
         Iterable<Services> requestServices = servicesService.getAllServices();
-        Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Request> requests = requestService.getAllActiveRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
 
         model.addAttribute("services", requestServices);
@@ -98,11 +98,11 @@ public class RequestController {
         }
 
     }
-    @GetMapping("/{requestId}/delete")
+    @GetMapping("/delete/{requestId}")
     public String deleteRequest(
             @PathVariable Integer requestId, Model model){
         Iterable<Services> requestServices = servicesService.getAllServices();
-        Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Request> requests = requestService.getAllActiveRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
 
         model.addAttribute("services", requestServices);
@@ -114,7 +114,7 @@ public class RequestController {
     }
 
 
-    @GetMapping("/{requestId}/edit")
+    @GetMapping("/edit/{requestId}")
     public String updateRequest(@PathVariable Integer requestId, Model model) {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
         Iterable<Services> requestServices = servicesService.getAllServices();
@@ -128,7 +128,7 @@ public class RequestController {
         return "createOrEditRequest";
     }
 
-    @PostMapping(path="/{requestId}/edit", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(path="/edit/{requestId}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public String updateRequest(
             @AuthenticationPrincipal User user,
             @Valid Request request,
@@ -145,11 +145,11 @@ public class RequestController {
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);
-            Integer newRequestId = requestService.createRequest(request, statusId, serviceId, user);
+            requestService.updateRequest(request, statusId, serviceId);
         }
 
         Iterable<Services> requestServices = servicesService.getAllServices();
-        Iterable<Request> requests = requestService.getAllRequests();
+        Iterable<Request> requests = requestService.getAllActiveRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
 
         model.addAttribute("services", requestServices );

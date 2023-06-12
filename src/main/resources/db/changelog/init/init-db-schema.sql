@@ -10,6 +10,7 @@ create table request (
                          service_id int4,
                          creation_date TIMESTAMP,
                          last_modified TIMESTAMP,
+                         completion_date TIMESTAMP,
                          primary key (id));
 
 create table status (

@@ -21,15 +21,16 @@
                         <#if isAdmin>
                             <a href="myrequests/${request.author.id}">${request.authorName}</a><!-- authorName -->
 
-                            <a class="btn btn-primary" href="/request/${request.id}/edit">
+                            <a class="btn btn-primary" href="/request/edit/${request.id}">
                                 Изменить
                             </a>
-                            <a class="btn btn-warning" href="/request/${request.id}/delete">
+                            <a class="btn btn-warning" href="/request/delete/${request.id}">
                                 Удалить
                             </a>
                         </#if>
                     </div>
                 </div>
+
 
             <#else>
                 Объявлений нет
@@ -46,6 +47,7 @@
 <#--                    <p class="card-description"> Lorem ipsum dolor sit amet, consectetur adipis cingelit. Etiam lacinia elit et placerat finibus. Praesent justo metus, pharetra vel nibh sit amet, tincidunt posuere nulla. Vivamus odio antement, feugiat eget nisi sit amet, scelerisque dignissim velit antement. </p>-->
 <#--                </div>-->
 <#--            </div>-->
+
         </div>
     </div>
 

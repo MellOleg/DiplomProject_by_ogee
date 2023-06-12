@@ -46,6 +46,9 @@ public class Request {
     @Column(name = "last_modified")
     private Date lastModifiedTime;
 
+    @Column(name = "completion_date")
+    private Date completedTime;
+
     public Request() {
     }
 
