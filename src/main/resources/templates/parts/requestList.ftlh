@@ -50,3 +50,4 @@
     </div>
 
 </section>
+<#include "footer.ftlh">

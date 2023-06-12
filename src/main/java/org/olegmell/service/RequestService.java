@@ -1,12 +1,16 @@
 package org.olegmell.service;
 
 import org.olegmell.domain.Request;
+import org.olegmell.domain.Status;
 import org.olegmell.domain.User;
 import org.olegmell.repository.RequestRepository;
+import org.olegmell.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class RequestService{
@@ -58,5 +62,7 @@ public class RequestService{
             return false;          // entity doesn't exist
         }
     }
+
+
 
 }

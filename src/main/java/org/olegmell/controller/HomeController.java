@@ -5,15 +5,15 @@ import org.olegmell.repository.RequestRepository;
 import org.olegmell.repository.ServicesRepository;
 import org.olegmell.repository.StatusRepository;
 import org.olegmell.service.PerformingOrganisationService;
+import org.olegmell.service.RequestService;
 import org.olegmell.service.ServicesService;
+import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +22,6 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -37,10 +36,16 @@ public class HomeController {
     private PerformingOrganisationService organisationService;
 
     @Autowired
+    private RequestService requestService;
+
+    @Autowired
     private StatusRepository statusRepository;
 
     @Autowired
     private ServicesService servicesService;
+
+    @Autowired
+    private StatusService statusService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -62,17 +67,20 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Request> requests = requestRepository.findAll();
+    public String main(@RequestParam(required = false, defaultValue = "") String filter,
+                       String name,
+                       Model model) {
+        Iterable<Request> requests = requestService.getAllRequests();
         Iterable<Status> requestStatus = statusRepository.findAll();
         Iterable<Services> requestServices = servicesService.getAllServices();
 
-
         if (filter != null && !filter.isEmpty()) {
-            requests = requestRepository.findByTag(filter);
+            requests = requestService.getAllByTag(filter);
         } else {
-            requests = requestRepository.findAll();
+            requests = requestService.getAllRequests();
         }
+
+
         model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);

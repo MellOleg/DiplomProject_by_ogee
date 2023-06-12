@@ -1,8 +1,6 @@
 body {
   height: 100%;
-
   color: #113;
-
   font-family: 'Ubuntu', sans-serif;
   font-size: 14px;
 }
@@ -285,3 +283,5 @@ flex: 1 1 auto;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
+
+
