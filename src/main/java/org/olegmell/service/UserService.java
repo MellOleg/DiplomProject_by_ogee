@@ -1,5 +1,6 @@
 package org.olegmell.service;
 
+
 import org.olegmell.domain.Request;
 import org.olegmell.domain.Role;
 import org.olegmell.domain.User;
@@ -112,6 +113,7 @@ public class UserService implements UserDetailsService {
     public Iterable<Request> getActiveUserRequests (User user){
         List<Request> userRequests = new ArrayList<>(userRepository.getOne(user.getId()).getRequests());
         userRequests.removeIf(request -> request.getStatus().getId()==3);
+        Collections.sort(userRequests, Collections.reverseOrder());
         return userRequests;
     }
 

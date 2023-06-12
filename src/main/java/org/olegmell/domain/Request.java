@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Request {
+public class Request implements Comparable<Request>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -63,4 +63,8 @@ public class Request {
         return author != null ? author.getUsername() : "<none>";
     }
 
+    @Override
+    public int compareTo(Request requestToCompare) {
+        return getCreatedTime().compareTo(requestToCompare.getCreatedTime());
+    }
 }
