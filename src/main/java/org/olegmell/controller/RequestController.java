@@ -1,9 +1,7 @@
 package org.olegmell.controller;
 
-import org.olegmell.domain.Request;
-import org.olegmell.domain.Services;
-import org.olegmell.domain.Status;
-import org.olegmell.domain.User;
+import org.olegmell.domain.*;
+import org.olegmell.service.AddressService;
 import org.olegmell.service.RequestService;
 import org.olegmell.service.ServicesService;
 import org.olegmell.service.StatusService;
@@ -36,6 +34,9 @@ public class RequestController {
     @Autowired
     private ServicesService servicesService;
 
+    @Autowired
+    private AddressService addressService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -44,11 +45,7 @@ public class RequestController {
     public String requestAdminPage(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Request> requests = requestService.getAllActiveRequests();
 
-        if (filter != null && !filter.isEmpty()) {
-            requests = requestService.getAllByTag(filter);
-        } else {
-            requests = requestService.getAllActiveRequests();
-        }
+        requests = requestService.getAllActiveRequests();
 
         model.addAttribute("requests", requests);
         model.addAttribute("filter", filter);
@@ -60,9 +57,11 @@ public class RequestController {
     public String createRequestForm(Model model) {
         Iterable<Services> services = servicesService.getAllServices();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
+        Iterable<Address> addresses = addressService.getAllAddresses();
 
         model.addAttribute("services", services);
         model.addAttribute("status", requestStatus);
+        model.addAttribute("addresses", addresses);
 
         return "createOrEditRequest";
     }

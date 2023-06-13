@@ -3,7 +3,7 @@ create sequence hibernate_sequence start 1 increment 1;
 create table request (
                          id serial not null,
                          filename varchar(255),
-                         tag varchar(255) not null ,
+                         address_id int4 not null ,
                          text varchar(255) not null ,
                          user_id int4,
                          status_id int4,

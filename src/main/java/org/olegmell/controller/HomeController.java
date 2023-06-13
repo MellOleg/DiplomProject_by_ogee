@@ -63,11 +63,7 @@ public class HomeController {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
         Iterable<Services> requestServices = servicesService.getAllServices();
 
-        if (filter != null && !filter.isEmpty()) {
-            requests = requestService.searchByTag(filter);
-        } else {
-            requests = requestService.getAllActiveRequests();
-        }
+        requests = requestService.getAllActiveRequests();
 
         model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);
@@ -83,11 +79,7 @@ public class HomeController {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
         Iterable<Services> requestServices = servicesService.getAllServices();
 
-        if (filter != null && !filter.isEmpty()) {
-            requests = requestService.searchByTag(filter);
-        } else {
-            requests = requestService.getAllActiveRequests();
-        }
+        requests = requestService.getAllActiveRequests();
 
         model.addAttribute("services", requestServices);
         model.addAttribute("requests", requests);

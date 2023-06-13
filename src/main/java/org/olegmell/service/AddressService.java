@@ -19,4 +19,11 @@ public class AddressService {
         return addressRepository.findAllAddress();
     }
 
+    public List<Address> searchAddress (String keyword) {
+        if (keyword != null) {
+            return addressRepository.search(keyword);
+        }
+        return addressRepository.findAllAddress();
+    }
+
 }

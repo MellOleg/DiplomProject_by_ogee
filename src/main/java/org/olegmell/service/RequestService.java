@@ -56,14 +56,6 @@ public class RequestService{
         return requestRepository.findAll(Sort.by(Sort.Direction.ASC, "createdTime"));
     }
 
-    public Iterable<Request> searchByTag(String tag){
-        return requestRepository.findByTag(tag);
-    }
-
-    public Iterable<Request> getAllByTag(String filter) {
-        return requestRepository.findByTag(filter);
-    }
-
     public void deleteById(Integer requestId) {
         if (exists(requestId)){
             requestRepository.deleteById(requestId);
