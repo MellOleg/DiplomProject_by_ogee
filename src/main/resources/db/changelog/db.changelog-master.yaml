@@ -1,3 +1,11 @@
 databaseChangeLog:
   - include:
       file: db/changelog/init/db-initial-creation-changeset-1.yaml
+  - changeSet:
+      id: loadData-address
+      author: oleg-mel
+      changes:
+        - loadData:
+            file: db/changelog/add-address-original.csv
+            tableName: address
+            encoding:  UTF-8
