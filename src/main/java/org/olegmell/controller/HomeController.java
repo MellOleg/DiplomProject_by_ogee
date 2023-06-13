@@ -77,4 +77,23 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/adminpage")
+    public String newAdminPage(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        Iterable<Request> requests = requestService.getAllActiveRequests();
+        Iterable<Status> requestStatus = statusService.getAllStatuses();
+        Iterable<Services> requestServices = servicesService.getAllServices();
+
+        if (filter != null && !filter.isEmpty()) {
+            requests = requestService.searchByTag(filter);
+        } else {
+            requests = requestService.getAllActiveRequests();
+        }
+
+        model.addAttribute("services", requestServices);
+        model.addAttribute("requests", requests);
+        model.addAttribute("filter", filter);
+        model.addAttribute("status", requestStatus);
+
+        return "adminpage";
+    }
 }

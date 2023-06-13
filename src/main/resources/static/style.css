@@ -283,5 +283,19 @@ flex: 1 1 auto;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
+.main-block-adminpage{
+    margin-top: 60px;
+    margin-left: 12%;
+}
+.border-block-adminpage{
+    position: relative;
+    z-index: 10;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0px 100px 0px 100px;
+}
+.card mb-3{
+    background-color: #121416;
+}
 
 

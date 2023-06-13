@@ -32,6 +32,7 @@
                             <a class="dropdown-item" href="/services">Сервисы и услуги</a>
                             <a class="dropdown-item" href="/user">Список пользователей</a>
                             <a class="dropdown-item" href="/home">Заявки в ожидании</a>
+                            <a class="dropdown-item" href="/adminpage">Заявки "На рассмотрении"</a>
                         </div>
                     </li>
                     </#if>
