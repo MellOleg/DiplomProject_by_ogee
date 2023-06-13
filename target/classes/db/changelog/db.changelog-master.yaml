@@ -1,3 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: db/changelog/init/db-initial-creation-changeset-1.yaml

@@ -1,9 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: db/changelog/init/init-db-schema.sql
-  - include:
-      file: db/changelog/init/add-admin-insert.sql
-  - include:
-      file: db/changelog/init/encode-password.sql
-  - include:
-      file: db/changelog/init/init-performingOrganisation.sql
