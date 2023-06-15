@@ -1,11 +1,13 @@
 package org.olegmell.service;
 
 import org.olegmell.domain.Address;
+import org.olegmell.domain.AddressItem;
 import org.olegmell.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AddressService {
@@ -21,11 +23,21 @@ public class AddressService {
         return addressRepository.findAllAddress();
     }
 
-    public List<Address> searchAddress (String keyword) {
+    public List<AddressItem> searchAddress (String keyword) {
         if (keyword != null) {
-            return addressRepository.search(keyword);
+            return addressRepository.search(keyword)
+                    .stream().map(this::mapToAddressItem)
+                    .collect(Collectors.toList());
         }
-        return addressRepository.findAllAddress();
+        return addressRepository.findAllAddress()
+                .stream().map(this::mapToAddressItem)
+                .collect(Collectors.toList());    }
+
+    private AddressItem mapToAddressItem(Address address) {
+        return AddressItem.builder()
+                .id(address.getId())
+                .address(address.getAddress())
+                .build();
     }
 
 }
