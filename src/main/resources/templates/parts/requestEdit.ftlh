@@ -12,15 +12,16 @@
                     </div>
                 </#if>
             </div>
+
+
             <div class="form-group">
-                <input type="text" class="form-control ${(tagError??)?string('is-invalid', '')}"
-                       value="<#if request??>${request.tag}</#if>" name="tag" placeholder="Укажите адрес, требующий исполнения услуги.">
-                <#if tagError??>
-                    <div class="invalid-feedback">
-                        ${tagError}
-                    </div>
-                </#if>
+			    <label for="address">Aдрес</label>
+                    <select class="form-control select2-single" id="address" name="address">
+                            <option value="">Укажите адрес, требующий исполнения услуги</option>
+                    </select>
             </div>
+
+
 
             <div class="form-group">
                 <label for="requestServices">Выберите услугу</label>
@@ -83,6 +84,23 @@
                 imagePreview.src = URL.createObjectURL(file)
               }
             }
+        </script>
+
+        <script>
+            $("#address").select2({
+                theme: "bootstrap4",
+                ajax: {
+                    url: '/address',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+            });
         </script>
     </div>
     </div>
