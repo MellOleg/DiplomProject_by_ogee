@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,8 +20,10 @@ public class Request implements Comparable<Request>{
 
     @NotBlank(message = "Пожалуйста, введите сообщение")
     private String text;
-    @NotBlank(message = "Пожалуйста, введите тэг")
-    private String tag;
+    @NotBlank(message = "Пожалуйста, введите адрес")
+    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "user_id")
@@ -52,10 +53,10 @@ public class Request implements Comparable<Request>{
     public Request() {
     }
 
-    public Request(String text, String tag, User user, Status status) {
+    public Request(String text, Address address, User user, Status status) {
         this.author = user;
         this.text = text;
-        this.tag = tag;
+        this.address = address;
         this.status = status;
     }
 
