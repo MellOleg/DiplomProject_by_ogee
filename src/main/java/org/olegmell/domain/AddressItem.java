@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class AddressItem {
     private Integer id;
-    private String address;
+    private String text;
 
 }

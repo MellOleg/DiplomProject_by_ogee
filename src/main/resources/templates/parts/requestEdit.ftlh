@@ -15,9 +15,9 @@
 
 
             <div class="form-group">
-			    <label for="address">Aдрес</label>
+			    <label for="address">Укажите адрес, требующий исполнения услуги</label>
                     <select class="form-control select2-single" id="address" name="address">
-                            <option value="">Укажите адрес, требующий исполнения услуги</option>
+                            <option value=""></option>
                     </select>
             </div>
 
@@ -86,23 +86,23 @@
             }
         </script>
 
-        <script type="text/javascript">
-
-            const searchaddress = document.getElementById('address');
-            searchaddress.select2({
-                theme: "bootstrap4",
+        <script>
+				$("#address").select2({
+				placeholder: "Выберете адрес из списка",
+				theme: "bootstrap4",
                 ajax: {
-                    url: '/address',
+                    url: 'http://localhost:8080/address',
                     dataType: 'json',
-                    delay: 250,
+                    type: "GET",
                     processResults: function (response) {
                         return {
                             results: response
                         };
                     },
-                    cache: true
+                    cache: true,
+                    minimumInputLength: 2
                 }
-            });
+				});
         </script>
     </div>
     </div>

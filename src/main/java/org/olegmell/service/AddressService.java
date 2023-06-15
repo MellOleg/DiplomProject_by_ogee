@@ -36,7 +36,7 @@ public class AddressService {
     private AddressItem mapToAddressItem(Address address) {
         return AddressItem.builder()
                 .id(address.getId())
-                .address(address.getAddress())
+                .text(address.getAddress())
                 .build();
     }
 
