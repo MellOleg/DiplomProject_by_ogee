@@ -3,9 +3,11 @@ package org.olegmell.service;
 import org.olegmell.domain.Address;
 import org.olegmell.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AddressService {
 
     private final AddressRepository addressRepository;
