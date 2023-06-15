@@ -86,8 +86,10 @@
             }
         </script>
 
-        <script>
-            $("#address").select2({
+        <script type="text/javascript">
+
+            const searchaddress = document.getElementById('address');
+            searchaddress.select2({
                 theme: "bootstrap4",
                 ajax: {
                     url: '/address',
