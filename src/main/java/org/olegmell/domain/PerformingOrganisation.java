@@ -15,7 +15,7 @@ public class PerformingOrganisation {
 
     private String organisationName;
     private String organisationEmail;
-    private int organisationPhoneNumber;
+    private String organisationPhoneNumber;
     private String organisationAddress;
 
 

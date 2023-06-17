@@ -117,9 +117,11 @@ public class RequestController {
     public String updateRequest(@PathVariable Integer requestId, Model model) {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
         Iterable<Services> requestServices = servicesService.getAllServices();
+        Iterable<Address> addresses = addressService.getAllAddresses();
 
         Request request = requestService.getRequestById(requestId);
 
+        model.addAttribute("addresses", addresses);
         model.addAttribute("services", requestServices);
         model.addAttribute("request", request);
         model.addAttribute("status", requestStatus);
@@ -150,7 +152,9 @@ public class RequestController {
         Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Request> requests = requestService.getAllActiveRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
+        Iterable<Address> addresses = addressService.getAllAddresses();
 
+        model.addAttribute("addresses", addresses);
         model.addAttribute("services", requestServices );
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);

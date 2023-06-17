@@ -3,7 +3,7 @@ create table performing_organisation (
     organisation_address varchar(255),
     organisation_email varchar(255),
     organisation_name varchar(255),
-    organisation_phone_number int4 not null,
+    organisation_phone_number varchar(255) not null,
     service_id int4,
     primary key (id));
 

@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h5 class="card-title">${request.service.service_name}</h5>
                     <p class="card-text">${request.text}</p>
-                    <p class="card-text">${request.tag}</p>
+                    <p class="card-text">${request.address.address}</p>
                     <p class="card-text"><small class="text-muted">${request.status.name}</small>
                     </p>
                 </div>
