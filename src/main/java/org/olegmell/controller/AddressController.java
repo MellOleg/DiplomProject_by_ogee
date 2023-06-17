@@ -1,9 +1,8 @@
 package org.olegmell.controller;
 
-import org.olegmell.domain.Address;
+import org.olegmell.domain.AddressItem;
 import org.olegmell.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,13 +18,7 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
-    public List<Address> addressList(@RequestParam(value = "q", required = false) String query) {
-        if (ObjectUtils.isEmpty(query)) {
-            return addressService.getAllAddresses()
-                    .stream()
-                    .limit(15)
-                    .collect(Collectors.toList());
-        }
+    public List<AddressItem> addressList(@RequestParam(value = "q", required = false) String query) {
 
         return addressService.searchAddress(query)
                 .stream()
