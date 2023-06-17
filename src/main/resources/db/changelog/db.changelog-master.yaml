@@ -10,10 +10,6 @@ databaseChangeLog:
             file: db/changelog/add-address-original.csv
             tableName: address
             encoding:  UTF-8
-  - changeSet:
-      id: loadData-performing_organisation
-      author: oleg-mel
-      changes:
         - loadData:
             file: db/changelog/add-organisations-original.csv
             tableName: performing_organisation

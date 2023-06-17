@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name="performing_organisation")
 @Getter
 @Setter
 public class PerformingOrganisation {
