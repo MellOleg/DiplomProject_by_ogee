@@ -36,9 +36,9 @@
 							  <p class="h2 mb-1" id="wrapper-name"></p>
 							  <p class="mb-1" id="wrapper-description"></p>
 							  <p class="display-1 mb-1" id="wrapper-temp"></p>
-							  <span class="">Pressure: <span id="wrapper-pressure"></span></span>
+							  <span class="">Давление: <span id="wrapper-pressure"></span></span>
 							  <span class="mx-2">|</span>
-							  <span class="">Humidity: <span id="wrapper-humidity"></span></span>
+							  <span class="">Влажность: <span id="wrapper-humidity"></span></span>
 							</div>
 						  </div>
 
@@ -46,7 +46,7 @@
 						  <div class="card-body p-4 border-top border-bottom mb-2">
 							<div class="row text-center">
 							  <div class="col-2">
-								<strong class="d-block mb-2">Now</strong>
+								<strong class="d-block mb-2">Сейчас</strong>
 								<img id="wrapper-icon-hour-now" src="" class="" alt="" />
 								<strong class="d-block" id="wrapper-hour-now"></strong>
 							  </div>
@@ -87,7 +87,7 @@
 						  <div class="card-body px-5">
 							<div class="row align-items-center">
 							  <div class="col-lg-6">
-								<strong>Today</strong>
+								<strong>Сегодня</strong>
 							  </div>
 
 							  <div class="col-lg-2 text-center">
@@ -101,7 +101,7 @@
 
 							<div class="row align-items-center">
 							  <div class="col-lg-6">
-								<strong>Tomorrow</strong>
+								<strong>Завтра</strong>
 							  </div>
 
 							  <div class="col-lg-2 text-center">
@@ -115,7 +115,7 @@
 
 							<div class="row align-items-center">
 							  <div class="col-lg-6">
-								<strong>Day after tomorrow</strong>
+								<strong>Послезавтра</strong>
 							  </div>
 
 							  <div class="col-lg-2 text-center">
