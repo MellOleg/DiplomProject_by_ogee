@@ -21,16 +21,15 @@ public class Services {
 
     //one to many
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "service_organisation",
-            joinColumns = @JoinColumn(name = "service_id"),
-            inverseJoinColumns = @JoinColumn(name = "organisation_id"))
-    Set<PerformingOrganisation> organisationsServices;
+            joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "organisation_id", referencedColumnName = "id")
+    )
+    private Set<PerformingOrganisation> organisationsServices;
 
-    public Services() {
-
-    }
+    public Services() {    }
 
     public Services(String service_name) {
         this.service_name = service_name;

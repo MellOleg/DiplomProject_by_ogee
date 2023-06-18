@@ -20,9 +20,4 @@ public class PerformingOrganisation {
     private String organisationPhoneNumber;
     private String organisationAddress;
 
-
-    @ManyToMany
-    @JoinColumn(name = "organisationsServices")
-    private Set<Services> services;
-
 }
