@@ -85,10 +85,12 @@
               }
             }
         </script>
+        <script src="/static/select2/js/i18n/ru.js" type="text/javascript"></script>
 
         <script>
 				$("#address").select2({
 				placeholder: "Выберете адрес из списка",
+				language: "ru",
 				theme: "bootstrap4",
                 ajax: {
                     url: 'http://localhost:8080/address',

@@ -25,7 +25,7 @@ public class AddressService {
 
     public List<AddressItem> searchAddress (String keyword) {
         if (keyword != null) {
-            return addressRepository.search(keyword)
+            return addressRepository.search(keyword.toLowerCase())
                     .stream().map(this::mapToAddressItem)
                     .collect(Collectors.toList());
         }

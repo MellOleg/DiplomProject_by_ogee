@@ -15,7 +15,7 @@ public interface AddressRepository extends JpaRepository<Address,Integer> {
     List<Address> findAllAddress();
 
     @Query(
-            value = "SELECT * FROM ADDRESS a WHERE a.address LIKE %?1% AND a.is_deleted = 'false' ORDER BY id",
+            value = "SELECT * FROM ADDRESS a WHERE LOWER (a.address) LIKE %?1% AND a.is_deleted = 'false' ORDER BY id",
             nativeQuery = true)
     List<Address> search(String keyword);
 }
