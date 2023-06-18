@@ -45,6 +45,14 @@ h5{
 
 }
 
+.bg-image {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%
+}
+
 .main-block {
     position: relative;
 
