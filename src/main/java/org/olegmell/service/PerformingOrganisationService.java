@@ -24,11 +24,11 @@ public class PerformingOrganisationService {
         return organisationRepository.findAll();
     }
 
-    public void createOrganisation(PerformingOrganisation performingOrganisation,
-                                   Integer serviceId){
-        performingOrganisation.setServices(servicesService.getServicesById(serviceId));
-        PerformingOrganisation organisation = organisationRepository.save(performingOrganisation);
-    }
+//    public void createOrganisation(PerformingOrganisation performingOrganisation,
+//                                   Integer serviceId){
+//        performingOrganisation.setServices(servicesService.getServicesById(serviceId));
+//        PerformingOrganisation organisation = organisationRepository.save(performingOrganisation);
+//    }
 
 
 }

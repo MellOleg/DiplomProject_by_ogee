@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="performing_organisation")
@@ -20,8 +21,8 @@ public class PerformingOrganisation {
     private String organisationAddress;
 
 
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    private Services services;
+    @ManyToMany
+    @JoinColumn(name = "organisationsServices")
+    private Set<Services> services;
 
 }

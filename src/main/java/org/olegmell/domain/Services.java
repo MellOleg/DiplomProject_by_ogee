@@ -19,10 +19,14 @@ public class Services {
     @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
     private Set<Request> requests;
 
-    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY)
-    private Set<PerformingOrganisation> performingOrganisation;
     //one to many
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "service_organisation",
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "organisation_id"))
+    Set<PerformingOrganisation> organisationsServices;
 
     public Services() {
 
