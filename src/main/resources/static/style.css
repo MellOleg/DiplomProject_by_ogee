@@ -23,6 +23,7 @@ h5{
     overflow: hidden;
     display: flex;
     flex-direction: column;
+
 }
 .page {
     flex: 1 1 auto;
@@ -75,7 +76,7 @@ h1{
 .main_block_body {
     position: relative;
     z-index: 10;
-    max-width: 900px;
+    max-width: 1900px;
     margin: 0 auto;
     color: #fff;
     padding: 380px 0px;
@@ -304,6 +305,23 @@ flex: 1 1 auto;
 }
 .card mb-3{
     background-color: #121416;
+}
+.page-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.left-panel-wrapper {
+    width: 300px;
+
+}
+.right-panel-wrapper {
+    width: 300px;
+
+}
+.content-wrapper {
+    /*width: 250px;*/
+    width: calc(100% - 600px);
+    padding: 0 30px;
 }
 
 
