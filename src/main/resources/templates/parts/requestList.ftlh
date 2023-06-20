@@ -13,7 +13,7 @@
                     </div>
                     <div class="table">
                         <span>${request.text}</span><br>
-                        <i>#${request.tag}</i><br>
+                        <i>${request.address.address}</i><br>
                         <span>Статус - ${request.status.name}</span><br>
                         <span>Услуга - ${request.service.service_name}</span><br>
                     </div>

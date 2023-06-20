@@ -14,7 +14,8 @@
         <tr>
             <td>${service.service_name}</td>
             <td><#list organisationIterable as organisation>
-                    <#if service.id == organisation.services.id>${organisation.organisationName} |</#if>
+<#--                    <#if service.id == organisation> |</#if>-->${organisation.organisationName} |
+                    <>
                 </#list>
             </td>
             <td>55p</td>

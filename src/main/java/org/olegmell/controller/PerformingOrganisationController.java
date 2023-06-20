@@ -43,10 +43,10 @@ public class PerformingOrganisationController {
         return "addOrganisation";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping(path="/add", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public String addOrganisationPost( PerformingOrganisation performingOrganisation, Integer serviceId) {
-        organisationService.createOrganisation(performingOrganisation, serviceId);
-        return "redirect:/services";
-    }
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PostMapping(path="/add", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+//    public String addOrganisationPost( PerformingOrganisation performingOrganisation, Integer serviceId) {
+//        organisationService.createOrganisation(performingOrganisation, serviceId);
+//        return "redirect:/services";
+//    }
 }

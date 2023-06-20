@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name="performing_organisation")
 @Getter
 @Setter
 public class PerformingOrganisation {
@@ -15,12 +17,7 @@ public class PerformingOrganisation {
 
     private String organisationName;
     private String organisationEmail;
-    private int organisationPhoneNumber;
+    private String organisationPhoneNumber;
     private String organisationAddress;
-
-
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    private Services services;
 
 }

@@ -19,14 +19,17 @@ public class Services {
     @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
     private Set<Request> requests;
 
-    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY)
-    private Set<PerformingOrganisation> performingOrganisation;
     //one to many
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "service_organisation",
+            joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "organisation_id", referencedColumnName = "id")
+    )
+    private Set<PerformingOrganisation> organisationsServices;
 
-    public Services() {
-
-    }
+    public Services() {    }
 
     public Services(String service_name) {
         this.service_name = service_name;
