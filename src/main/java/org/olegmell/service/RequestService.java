@@ -16,7 +16,10 @@ public class RequestService{
     private RequestRepository requestRepository;
 
     @Autowired
-    StatusService statusService;
+    private AddressService addressService;
+
+    @Autowired
+    private StatusService statusService;
 
     @Autowired
     private ServicesService servicesService;
@@ -34,8 +37,21 @@ public class RequestService{
         return newRequest.getId();
     }
 
-    public void updateRequest (Request request, Integer statusId, Integer serviceId){
+    public void updateRequest (Request request, Integer addressId, Integer statusId, Integer serviceId){
         Request existingRequest = requestRepository.getOne(request.getId());
+        existingRequest.setAddress(addressService.getAddress(addressId));
+        existingRequest.setStatus(statusService.getStatusById(statusId));
+        existingRequest.setService(servicesService.getServicesById(serviceId));
+        existingRequest.setText(request.getText());
+        existingRequest.setFilename(request.getFilename());
+        if (statusId == 3){ existingRequest.setCompletedTime(Calendar.getInstance().getTime()); }
+
+        requestRepository.saveAndFlush(existingRequest);
+    }
+    public void updateRequest (Request request, Integer addressId, Integer statusId, Integer serviceId, String filename){
+        Request existingRequest = requestRepository.getOne(request.getId());
+        existingRequest.setFilename(filename);
+        existingRequest.setAddress(addressService.getAddress(addressId));
         existingRequest.setStatus(statusService.getStatusById(statusId));
         existingRequest.setService(servicesService.getServicesById(serviceId));
         existingRequest.setText(request.getText());

@@ -14,7 +14,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     List<Request> findAllActiveRequests();
 
     @Query(
-            value = "SELECT * FROM REQUEST r WHERE r.status_id = 1 ORDER BY creation_date DESC",
+            value = "SELECT * FROM REQUEST r WHERE r.status_id = 1 ORDER BY creation_date ASC",
             nativeQuery = true)
     List<Request> findAllPendingRequests();
 }

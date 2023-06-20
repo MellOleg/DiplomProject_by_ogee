@@ -33,6 +33,15 @@ public class AddressService {
                 .stream().map(this::mapToAddressItem)
                 .collect(Collectors.toList());    }
 
+    public AddressItem getAddressItem(Integer addressId){
+        return mapToAddressItem(addressRepository.getOne(addressId));
+
+    }
+
+    public Address getAddress(Integer addressId){
+        return addressRepository.getOne(addressId);
+    }
+
     private AddressItem mapToAddressItem(Address address) {
         return AddressItem.builder()
                 .id(address.getId())

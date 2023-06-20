@@ -40,19 +40,6 @@ public class RequestController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/request")
-    public String requestAdminPage(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Request> requests = requestService.getAllActiveRequests();
-
-        requests = requestService.getAllActiveRequests();
-
-        model.addAttribute("requests", requests);
-        model.addAttribute("filter", filter);
-
-        return "home";
-    }
-
     @GetMapping("/create")
     public String createRequestForm(Model model) {
         Iterable<Services> services = servicesService.getAllServices();
@@ -63,7 +50,7 @@ public class RequestController {
         model.addAttribute("status", requestStatus);
         model.addAttribute("addresses", addresses);
 
-        return "createOrEditRequest";
+        return "createRequest";
     }
 
     @PostMapping(path ="/create", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
@@ -88,7 +75,7 @@ public class RequestController {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
             model.addAttribute("request", request);
-            return "createOrEditRequest" ;
+            return "createRequest" ;
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);
@@ -97,6 +84,7 @@ public class RequestController {
         }
 
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/delete/{requestId}")
     public String deleteRequest(
             @PathVariable Integer requestId, Model model){
@@ -126,7 +114,7 @@ public class RequestController {
         model.addAttribute("request", request);
         model.addAttribute("status", requestStatus);
 
-        return "createOrEditRequest";
+        return "editRequest";
     }
 
     @PostMapping(path="/edit/{requestId}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
@@ -136,17 +124,22 @@ public class RequestController {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file")MultipartFile file,
+            @RequestParam("address")Integer addressId,
             @RequestParam("requestServices")Integer serviceId,
-            @RequestParam("requestStatus")Integer statusId)
+            @RequestParam("requestStatus")Integer statusId,
+            @RequestParam("filename")String filename)
             throws IOException {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
             model.addAttribute("request", request);
+            return "editRequest" ;
+        } else if (file.isEmpty()){
+            requestService.updateRequest(request, addressId, statusId, serviceId, filename);
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);
-            requestService.updateRequest(request, statusId, serviceId);
+            requestService.updateRequest(request, addressId, statusId, serviceId);
         }
 
         Iterable<Services> requestServices = servicesService.getAllServices();
