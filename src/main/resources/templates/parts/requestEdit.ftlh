@@ -22,12 +22,11 @@
             </div>
 
 
-
             <div class="form-group">
                 <label for="requestServices">Выберите услугу</label>
                 <select class="form-control" id="requestServices" name="requestServices">
                     <#list services as requestServices>
-                        <option value="${requestServices.id}">
+                        <option value="${requestServices.id}" ${(requestServices.id == request.service.id)?string('selected', '')}>
                             ${requestServices.service_name}
                         </option>
                     </#list>
@@ -40,22 +39,14 @@
                     <label for="requestStatus">Выберите статус</label>
                         <select class="form-control" id="requestStatus" name="requestStatus">
                             <#list status as requestStatus>
-                                <option value="${requestStatus.id}">
+                               <option value="${requestStatus.id}" ${(requestStatus.id == request.status.id)?string('selected', '')}>
                                     ${requestStatus.name}
-                                </option>
+                               </option>
                             </#list>
                         </select>
                 </#if>
-                <#if !isAdmin>
-                    <select hidden class="form-control" id="requestStatus" name="requestStatus">
-                        <#list status as requestStatus>
-                            <option value="${requestStatus.id}">
-                                ${requestStatus.name}
-                            </option>
-                        </#list>
-                    </select>
-                 </#if>
             </div>
+
 			<div class="preview">
 				<#if !request??>
                     <img id="imagePreview" src="" class="img-fluid">

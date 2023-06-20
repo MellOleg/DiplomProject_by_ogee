@@ -22,7 +22,6 @@ public class Request implements Comparable<Request>{
     @NotBlank(message = "Пожалуйста, введите сообщение")
     private String text;
 
-
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
     @NotNull(message = "Пожалуйста, выберите адрес из списка")
