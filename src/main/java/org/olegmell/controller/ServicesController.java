@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/services")
+@RequestMapping("/admin/services")
 public class ServicesController {
     @Autowired
     private ServicesService servicesService;
@@ -44,6 +44,6 @@ public class ServicesController {
     @PostMapping("/add")
     public String addServicePost(@RequestParam String service_name) {
         servicesService.createService(service_name);
-        return "redirect:/services";
+        return "redirect:/admin/services";
     }
 }

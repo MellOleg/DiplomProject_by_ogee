@@ -12,4 +12,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
             value = "SELECT * FROM REQUEST r WHERE r.status_id <> 3 ORDER BY creation_date DESC",
             nativeQuery = true)
     List<Request> findAllActiveRequests();
+
+    @Query(
+            value = "SELECT * FROM REQUEST r WHERE r.status_id = 1 ORDER BY creation_date DESC",
+            nativeQuery = true)
+    List<Request> findAllPendingRequests();
 }
