@@ -1,46 +1,21 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.*;
-import org.olegmell.repository.RequestRepository;
-import org.olegmell.repository.ServicesRepository;
-import org.olegmell.repository.StatusRepository;
 import org.olegmell.service.PerformingOrganisationService;
-import org.olegmell.service.RequestService;
 import org.olegmell.service.ServicesService;
-import org.olegmell.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 public class HomeController {
     @Autowired
-    private RequestService requestService;
-
-    @Autowired
     private PerformingOrganisationService organisationService;
-
-    @Autowired
-    private StatusService statusService;
-
     @Autowired
     private ServicesService servicesService;
-
-    @Value("${upload.path}")
-    private String uploadPath;
-    private User user;
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -55,37 +30,5 @@ public class HomeController {
         model.addAttribute("organisationIterable", organisationIterable);
         model.addAttribute("servicesIterable", servicesIterable);
         return "priceList";
-    }
-
-    @GetMapping("/home")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Request> requests = requestService.getAllActiveRequests();
-        Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Iterable<Services> requestServices = servicesService.getAllServices();
-
-        requests = requestService.getAllActiveRequests();
-
-        model.addAttribute("services", requestServices);
-        model.addAttribute("requests", requests);
-        model.addAttribute("filter", filter);
-        model.addAttribute("status", requestStatus);
-
-        return "home";
-    }
-
-    @GetMapping("/adminpage")
-    public String newAdminPage(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Request> requests = requestService.getAllActiveRequests();
-        Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Iterable<Services> requestServices = servicesService.getAllServices();
-
-        requests = requestService.getAllActiveRequests();
-
-        model.addAttribute("services", requestServices);
-        model.addAttribute("requests", requests);
-        model.addAttribute("filter", filter);
-        model.addAttribute("status", requestStatus);
-
-        return "adminpage";
     }
 }

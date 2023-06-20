@@ -26,7 +26,7 @@
                                 Заблокирован
                             </#if>
                         </td>
-                        <td><a href="/user/${user.id}">Редактировать</a></td>
+                        <td><a href="/admin/user/${user.id}">Редактировать</a></td>
                     </tr>
                 </#list>
                 </tbody>

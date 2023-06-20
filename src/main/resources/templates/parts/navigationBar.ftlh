@@ -29,10 +29,10 @@
                         <a class="nav-link dropdown-toggle title" id="navbarDropdownMenuLink3" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Панель администратора</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/services">Сервисы и услуги</a>
-                            <a class="dropdown-item" href="/user">Список пользователей</a>
-                            <a class="dropdown-item" href="/home">Заявки в ожидании</a>
-                            <a class="dropdown-item" href="/adminpage">Заявки "На рассмотрении"</a>
+                            <a class="dropdown-item" href="/admin/services">Сервисы и услуги</a>
+                            <a class="dropdown-item" href="/admin/userslist">Список пользователей</a>
+                            <a class="dropdown-item" href="/admin/activerequests">Заявки в ожидании</a>
+                            <a class="dropdown-item" href="/admin/pendingrequests">Заявки "На рассмотрении"</a>
                         </div>
                     </li>
                     </#if>

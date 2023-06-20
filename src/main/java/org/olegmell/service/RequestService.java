@@ -52,6 +52,10 @@ public class RequestService{
     public Iterable<Request> getAllActiveRequests() {
         return requestRepository.findAllActiveRequests();
     }
+
+    public Iterable<Request> getAllPendingRequests() {
+        return requestRepository.findAllPendingRequests();
+    }
     public Iterable<Request> getAllRequests(){
         return requestRepository.findAll(Sort.by(Sort.Direction.ASC, "createdTime"));
     }
