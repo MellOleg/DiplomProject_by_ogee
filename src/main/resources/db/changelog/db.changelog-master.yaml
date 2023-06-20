@@ -14,3 +14,7 @@ databaseChangeLog:
             file: db/changelog/add-organisations-original.csv
             tableName: performing_organisation
             encoding: UTF-8
+        - loadData:
+            file: db/changelog/add-mapping-original.csv
+            tableName: service_organisation
+            encoding: UTF-8
