@@ -2,24 +2,149 @@
 
 <@c.page>
 
+    <script src="/static/openweather.js"></script>
     <div class="wrapper">
         <main class="page">
-
             <section class="main-block">
                 <div class="main-info  main-content">
                     <div class="main_block_body">
-                        <h1>Вас приветствует сервис по резервированию услуг жильцов многоквартирных домов</h1>
-                        <#--
-                        <#--                     <p>Администрация сервиса оставляет за собой право на окончательную интрепритацию правил.</p>-->
-                        <p><span>Сервис предназначен для резервирования и исполнения услуг, связанных с работой желищнно-комунального хозяйства. Завку следует формуровать в соответствии с правилами создания заяки, это позволит ускорить ответ на вашу заявку и/или ее исполнение. </span></p>
-                        <div class="button-block">
-                            <a href="/request/create" class="button-info">Оставить заявку</a>
+                        <div class="page-wrapper">
+                            <div class="left-panel-wrapper">
+                                <div class="left-panel">
+
+                                        <div class="">
+
+                                            <div id="wrapper-bg" class="text-white bg-image shadow-4-strong"
+                                                 style="background-image: url('img/clouds.gif')">
+                                                <!-- Main current data -->
+                                                <div class="card-header p-4 border-0">
+                                                    <div class="text-center mb-3">
+                                                        <p class="h2 mb-1" id="wrapper-name"></p>
+                                                        <p class="mb-1" id="wrapper-description"></p>
+                                                        <p class="display-1 mb-1" id="wrapper-temp"></p>
+                                                        <span class="">Давление: <span id="wrapper-pressure"></span></span>
+                                                        <span class="mx-2">|</span>
+                                                        <span class="">Влажность: <span id="wrapper-humidity"></span></span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Hourly forecast -->
+                                                <div class="card-body p-4 border-top border-bottom mb-2">
+                                                    <div class="row text-center">
+                                                        <div class="col-2">
+                                                            <strong class="d-block mb-2">Сейчас</strong>
+                                                            <img id="wrapper-icon-hour-now" src="" class="" alt="" />
+                                                            <strong class="d-block" id="wrapper-hour-now"></strong>
+                                                        </div>
+
+                                                        <div class="col-2">
+                                                            <strong class="d-block mb-2" id="wrapper-time1"></strong>
+                                                            <img id="wrapper-icon-hour1" src="" class="" alt="" />
+                                                            <strong class="d-block" id="wrapper-hour1"></strong>
+                                                        </div>
+
+                                                        <div class="col-2">
+                                                            <strong class="d-block mb-2" id="wrapper-time2"></strong>
+                                                            <img id="wrapper-icon-hour2" src="" class="" alt="" />
+                                                            <strong class="d-block" id="wrapper-hour2"></strong>
+                                                        </div>
+
+                                                        <div class="col-2">
+                                                            <strong class="d-block mb-2" id="wrapper-time3"></strong>
+                                                            <img id="wrapper-icon-hour3" src="" class="" alt="" />
+                                                            <strong class="d-block" id="wrapper-hour3"></strong>
+                                                        </div>
+
+                                                        <div class="col-2">
+                                                            <strong class="d-block mb-2" id="wrapper-time4"></strong>
+                                                            <img id="wrapper-icon-hour4" src="" class="" alt="" />
+                                                            <strong class="d-block" id="wrapper-hour4"></strong>
+                                                        </div>
+
+                                                        <div class="col-2">
+                                                            <strong class="d-block mb-2" id="wrapper-time5"></strong>
+                                                            <img id="wrapper-icon-hour5" src="" class="" alt="" />
+                                                            <strong class="d-block" id="wrapper-hour5"></strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Daily forecast -->
+                                                <div class="card-body px-5">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6">
+                                                            <strong>Сегодня</strong>
+                                                        </div>
+
+                                                        <div class="col-lg-2 text-center">
+                                                            <img id="wrapper-icon-today" src="" class="w-100" alt="" />
+                                                        </div>
+
+                                                        <div class="col-lg-4 text-end">
+                                                            <span id="wrapper-forecast-temp-today"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6">
+                                                            <strong>Завтра</strong>
+                                                        </div>
+
+                                                        <div class="col-lg-2 text-center">
+                                                            <img id="wrapper-icon-tomorrow" src="" class="w-100" alt="" />
+                                                        </div>
+
+                                                        <div class="col-lg-4 text-end">
+                                                            <span id="wrapper-forecast-temp-tomorrow">28</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6">
+                                                            <strong>Послезавтра</strong>
+                                                        </div>
+
+                                                        <div class="col-lg-2 text-center">
+                                                            <img id="wrapper-icon-dAT" src="" class="w-100" alt="" />
+                                                        </div>
+
+                                                        <div class="col-lg-4 text-end">
+                                                            <span id="wrapper-forecast-temp-dAT">28</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                </div>
+                            </div>
+
+                            <div class="content-wrapper">
+                                <div class="content">
+                                    <h1>Вас приветствует сервис по резервированию услуг жильцов многоквартирных домов</h1>
+                                    <#--
+                                    <#--                     <p>Администрация сервиса оставляет за собой право на окончательную интрепритацию правил.</p>-->
+                                    <p><span>Сервис предназначен для резервирования и исполнения услуг, связанных с работой желищнно-комунального хозяйства. Завку следует формуровать в соответствии с правилами создания заяки, это позволит ускорить ответ на вашу заявку и/или ее исполнение. </span></p>
+                                    <div class="button-block">
+                                        <a href="/request/create" class="button-info">Оставить заявку</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="right-panel-wrapper">
+                                <div class="right-panel">
+                                    <p>1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="main_block-image _ibg ">
-                    <img src="https://mdbootstrap.com/img/Photos/Others/images/91.jpg" alt="">
+                    <img src="https://wallpapercrafter.com/desktop4/1213846-bridge-Belarus-Grodno-brewery-2K.jpg" alt="">
                 </div>
+
+
 
 
             </section>
