@@ -64,6 +64,7 @@
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" /></br>
             <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if> " /></br>
+            <input type="hidden" name="filename" value="<#if request??>${request.filename}<#else></#if> " /></br>
             <div class="form-group mt-3">
                 <button type="submit" class="btn btn-primary ">Сохранить</button>
             </div>

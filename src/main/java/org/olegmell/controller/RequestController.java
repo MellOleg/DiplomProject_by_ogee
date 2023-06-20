@@ -126,12 +126,16 @@ public class RequestController {
             @RequestParam("file")MultipartFile file,
             @RequestParam("address")Integer addressId,
             @RequestParam("requestServices")Integer serviceId,
-            @RequestParam("requestStatus")Integer statusId)
+            @RequestParam("requestStatus")Integer statusId,
+            @RequestParam("filename")String filename)
             throws IOException {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
             model.addAttribute("request", request);
+            return "editRequest" ;
+        } else if (file.isEmpty()){
+            requestService.updateRequest(request, addressId, statusId, serviceId, filename);
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);

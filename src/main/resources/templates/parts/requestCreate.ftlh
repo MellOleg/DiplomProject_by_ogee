@@ -62,7 +62,7 @@
 			</div>
             <div class="image-file">
 				<label class="image-file-label" for="imageInput">Выбрать файл</label>
-                <input class="form-control" type="file" name="file" accept="image/*" id="imageInput">
+                <input class="form-control" type="file" name="file" accept="image/*" id="imageInput" lang="ru">
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" /></br>
             <input type="hidden" name="id" value="<#if request??>${request.id}<#else>-1</#if> " /></br>
