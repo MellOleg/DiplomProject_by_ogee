@@ -31,7 +31,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/admin/services">Сервисы и услуги</a>
                             <a class="dropdown-item" href="/admin/userslist">Список пользователей</a>
-                            <a class="dropdown-item" href="/admin/activerequests">Заявки в ожидании</a>
+                            <a class="dropdown-item" href="/admin/activerequests">Активные заявки</a>
                             <a class="dropdown-item" href="/admin/pendingrequests">Заявки "На рассмотрении"</a>
                         </div>
                     </li>
