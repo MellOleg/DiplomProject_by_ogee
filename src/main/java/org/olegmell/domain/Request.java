@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -24,6 +25,7 @@ public class Request implements Comparable<Request>{
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
+    @NotNull(message = "Пожалуйста, выберите адрес из списка")
     private Address address;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -5,7 +5,7 @@
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="text" class="form-control ${(textError??)?string('is-invalid', '')}"
-                       value="<#if request??>${request.text}</#if>" name="text" placeholder=" Подробно опишите проблему" />
+                       value="" name="text" placeholder=" Подробно опишите проблему" />
                 <#if textError??>
                     <div class="invalid-feedback">
                         ${textError}
@@ -13,15 +13,17 @@
                 </#if>
             </div>
 
-
             <div class="form-group">
 			    <label for="address">Укажите адрес, требующий исполнения услуги</label>
-                    <select class="form-control select2-single" id="address" name="address">
+                    <select class="form-control select2-single ${(addressError??)?string('is-invalid', '')}" id="address" name="address">
                             <option value=""></option>
                     </select>
+                <#if addressError??>
+                    <div class="invalid-feedback">
+                        ${addressError}
+                    </div>
+                </#if>
             </div>
-
-
 
             <div class="form-group">
                 <label for="requestServices">Выберите услугу</label>
@@ -33,7 +35,6 @@
                     </#list>
                 </select>
             </div>
-
 
             <div class="form-group">
                 <#if isAdmin>
@@ -57,15 +58,7 @@
                  </#if>
             </div>
 			<div class="preview">
-				<#if !request??>
                     <img id="imagePreview" src="" class="img-fluid">
-                <#elseif request.filename??>
-                    <img id="imagePreview" src="/img/${request.filename}" class="img-fluid">
-				<#elseif request.id??>
-				    <img id="imagePreview" src="" class="img-fluid">
-				<#else>
-					<img id="imagePreview" src="/img/placeholder-16-9.jpg" class="img-fluid">
-                </#if>
 			</div>
             <div class="image-file">
 				<label class="image-file-label" for="imageInput">Выбрать файл</label>
@@ -105,24 +98,7 @@
                     minimumInputLength: 2
                 }
 				});
-
-				var addressSelect = $('#address');
-                $.ajax({
-                    type: 'GET',
-                    url: '/address/' + ${request.address.id}
-                }).then(function (data) {
-                    var option = new Option(data.text, data.id, true, true);
-                    addressSelect.append(option).trigger('change');
-
-                    addressSelect.trigger({
-                        type: 'select2:select',
-                        params: {
-                            data: data
-                        }
-                    });
-                });
         </script>
-
 
     </div>
     </div>
