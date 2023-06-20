@@ -14,11 +14,22 @@
         <tr>
             <td>${service.service_name}</td>
             <td><#list organisationIterable as organisation>
-<#--                    <#if service.id == organisation> |</#if>-->${organisation.organisationName} |
-                    <>
                 </#list>
+
             </td>
-            <td>55p</td>
+            <#function randomNumber salt>
+                <#local str= .now?long />
+                <#assign str = (str * salt)/3 />
+                <#return str[(str?string?length-5)..]/>
+            </#function>
+
+
+            <#assign rnd = randomNumber(-1)/>
+
+            function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+            }
+            <td>${rnd}</td>
         </tr>
         </#list>
         </tbody>

@@ -152,9 +152,7 @@ public class RequestController {
         Iterable<Services> requestServices = servicesService.getAllServices();
         Iterable<Request> requests = requestService.getAllActiveRequests();
         Iterable<Status> requestStatus = statusService.getAllStatuses();
-        Iterable<Address> addresses = addressService.getAllAddresses();
 
-        model.addAttribute("addresses", addresses);
         model.addAttribute("services", requestServices );
         model.addAttribute("requests", requests);
         model.addAttribute("status", requestStatus);

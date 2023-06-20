@@ -4,10 +4,10 @@
     <section class="main-block-services">
         <div class="border-block-services">
             <li class="nav-item">
-                <a class="nav-link" href="/services/add">Добавить услугу</a>
-            </li>
+                <a class="btn btn-primary" href="/admin/services/add">Добавить услугу</a>
+            </li><br>
             <li class="nav-item">
-                <a class="nav-link" href="/organisation/add">Добавить организацию</a>
+                <a class="btn btn-primary" href="/organisation/add">Добавить организацию</a>
             </li>
 
             <table class="table">
@@ -22,7 +22,7 @@
                 <tr>
                     <td>${service.service_name}</td>
                     <td><#list organisationIterable as organisation>
-                            <#if service.id == organisation.services.id>${organisation.organisationName} |</#if>
+                            <#if service.id == organisation.id>${organisation.organisationName} |</#if>
                         </#list>
                     </td>
                     </#list>

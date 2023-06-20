@@ -2,7 +2,6 @@ package org.olegmell.controller;
 
 import org.olegmell.domain.PerformingOrganisation;
 import org.olegmell.domain.Services;
-import org.olegmell.repository.ServicesRepository;
 import org.olegmell.service.PerformingOrganisationService;
 import org.olegmell.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
