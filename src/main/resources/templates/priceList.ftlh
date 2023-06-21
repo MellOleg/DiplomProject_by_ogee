@@ -12,13 +12,16 @@
         <tbody>
         <#list servicesIterable as service>
         <tr>
+            <#function randomNumber salt>
+                <#local str= .now?long />
+                <#assign str = (str * salt)/3 />
+                <#return str[(str?string?length-5)..]/>
+            </#function>
+
+
+            <#assign rnd = randomNumber(7)/>
             <td>${service.service_name}</td>
-            <td><#list organisationIterable as organisation>
-<#--                    <#if service.id == organisation> |</#if>-->${organisation.organisationName} |
-                    <>
-                </#list>
-            </td>
-            <td>55p</td>
+            <td>${rnd}</td>
         </tr>
         </#list>
         </tbody>

@@ -3,7 +3,7 @@
 <div class="navigation">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar white ">
         <div class="container">
-            <a class="navbar-brand font-weight-bold title" href="/">Brand</a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

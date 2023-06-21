@@ -134,7 +134,7 @@
 
                             <div class="right-panel-wrapper">
                                 <div class="right-panel">
-                                    <p>1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet 1XBet </p>
+                                    <p> </p>
                                 </div>
                             </div>
                         </div>

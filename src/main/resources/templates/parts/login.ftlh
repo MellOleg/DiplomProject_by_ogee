@@ -74,11 +74,9 @@
             </div>
 
             <div class="main_block-image _ibg ">
-                <img src="https://mdbootstrap.com/img/Photos/Others/images/91.jpg" alt="">
+                <img src="https://wallpapercrafter.com/desktop4/1213846-bridge-Belarus-Grodno-brewery-2K.jpg" alt="">
             </div>
         </section>
-
-
 </#macro>
 
 <#macro logout>
