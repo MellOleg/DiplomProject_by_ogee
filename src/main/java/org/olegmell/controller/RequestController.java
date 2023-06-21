@@ -97,7 +97,7 @@ public class RequestController {
         model.addAttribute("status", requestStatus);
 
         requestService.deleteById(requestId);
-        return "redirect:/home";
+        return "redirect:/user/myrequests";
     }
 
 
