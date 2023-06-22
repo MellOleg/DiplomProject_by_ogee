@@ -17,11 +17,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <#list servicesIterable as service>
+                <#list servicesIterable as service>
+                    <tr>
                         <td rowspan="${service.count}">${service.name}</td>
-                    </#list>
-                 </tr>
+                        <td>${service.organisationName[0]}</td>
+                    </tr>
+                    <#if service.organisationName[1]??>
+                         <#assign orgList = service.organisationName[1..]>
+                            <#list orgList as organisationList>
+                                <tr>
+                                    <td>${organisationList}</td>
+                                </tr>
+                            </#list>
+                    </#if>
+                </#list>
+
                 </tbody>
             </table>
 
