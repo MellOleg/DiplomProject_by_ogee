@@ -18,13 +18,20 @@
                 </thead>
                 <tbody>
                 <#list servicesIterable as service>
-                <tr>
-                    <td>${service.service_name}</td>
-                    <td><#list organisationIterable as organisation>
-                            <#if service.id == organisation.id>${organisation.organisationName} |</#if>
-                        </#list>
-                    </td>
-                    </#list>
+                    <tr>
+                        <td rowspan="${service.count}">${service.name}</td>
+                        <td>${service.organisationName[0]}</td>
+                    </tr>
+                    <#if service.organisationName[1]??>
+                         <#assign orgList = service.organisationName[1..]>
+                            <#list orgList as organisationList>
+                                <tr>
+                                    <td>${organisationList}</td>
+                                </tr>
+                            </#list>
+                    </#if>
+                </#list>
+
                 </tbody>
             </table>
 
