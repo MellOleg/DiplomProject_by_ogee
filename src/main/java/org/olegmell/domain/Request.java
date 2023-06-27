@@ -36,6 +36,10 @@ public class Request implements Comparable<Request>{
     private Services service;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organisation_id")
+    private PerformingOrganisation performingOrganisation;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     private Status status;
 

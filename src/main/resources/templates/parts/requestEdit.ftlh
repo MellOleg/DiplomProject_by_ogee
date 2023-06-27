@@ -33,6 +33,13 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="performingOrg">Выберите исполняющую организацию</label>
+                <select class="form-control select2-single" id="performingOrg" name="performingOrganisation">
+                    <option value=""></option>
+                </select>
+            </div>
+
 
             <div class="form-group">
                 <#if isAdmin>
@@ -115,6 +122,64 @@
                 });
         </script>
 
+        <script>
+                var selectedService = $('#requestServices').find(":selected").val();
+                $("#performingOrg").select2({
+				placeholder: "Выберете организацию из списка",
+				language: "ru",
+				theme: "bootstrap4",
+                ajax: {
+                    url: '/admin/services/' + selectedService + '/orgs',
+                    dataType: 'json',
+                    type: "GET",
+                    processResults: function (response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+				});
+
+                    <#if request.performingOrganisation??>
+                        var orgSelect = $('#performingOrg');
+                        $.ajax({
+                            type: 'GET',
+                            url: '/organisation/' + ${request.performingOrganisation.id}
+                        }).then(function (data) {
+                            var option = new Option(data.text, data.id, true, true);
+                            orgSelect.append(option).trigger('change');
+
+                            orgSelect.trigger({
+                                type: 'select2:select',
+                                params: {
+                                    data: data
+                                }
+                            });
+                        });
+                    </#if>
+
+                 $("#requestServices").on("change", function (){
+                        var selectedService = $('#requestServices').find(":selected").val();
+                        $("#performingOrg").val(null).trigger('change');
+                        $("#performingOrg").select2({
+                        placeholder: "Выберете организацию из списка",
+                        language: "ru",
+                        theme: "bootstrap4",
+                        ajax: {
+                            url: '/admin/services/' + selectedService + '/orgs',
+                            dataType: 'json',
+                            type: "GET",
+                            processResults: function (response) {
+                                return {
+                                    results: response
+                                };
+                            },
+                            cache: true
+                        }
+                        });
+                 });
+        </script>
 
     </div>
     </div>

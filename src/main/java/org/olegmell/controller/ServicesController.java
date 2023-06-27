@@ -1,6 +1,6 @@
 package org.olegmell.controller;
 
-import org.olegmell.domain.PerformingOrganisation;
+import org.olegmell.domain.AddressItem;
 import org.olegmell.domain.ServiceItem;
 import org.olegmell.domain.Services;
 import org.olegmell.service.PerformingOrganisationService;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/services")
@@ -51,5 +51,15 @@ public class ServicesController {
     @ResponseBody
     public List<ServiceItem> ServicesListAll(Model model) {
         return servicesService.getServiceList();
+    }
+
+    @GetMapping ("/allservices")
+    @ResponseBody
+    public List<Services> ServiceListObject(Model model){return servicesService.getAllServices();}
+
+    @GetMapping ("/{serviceid}/orgs")
+    @ResponseBody
+    public List<AddressItem> ServiceOrgs(@PathVariable Integer serviceid, Model model){
+        return servicesService.getAllServiceOrgs(serviceid);
     }
 }

@@ -20,4 +20,6 @@ public class PerformingOrganisation {
     private String organisationPhoneNumber;
     private String organisationAddress;
 
+    @OneToMany(mappedBy = "performingOrganisation", fetch = FetchType.LAZY)
+    private Set<Request> requestSet;
 }

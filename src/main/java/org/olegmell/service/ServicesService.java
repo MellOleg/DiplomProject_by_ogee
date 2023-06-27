@@ -1,15 +1,10 @@
 package org.olegmell.service;
 
-import org.olegmell.domain.AddressItem;
-import org.olegmell.domain.PerformingOrganisation;
-import org.olegmell.domain.ServiceItem;
-import org.olegmell.domain.Services;
+import org.olegmell.domain.*;
 import org.olegmell.repository.ServicesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +32,12 @@ public class ServicesService {
         servicesRepository.save(services);
     }
 
+    public List<AddressItem> getAllServiceOrgs(Integer serviceid){
+         return servicesRepository.getOne(serviceid).getOrganisationsServices()
+                        .stream().map(this::mapToItem)
+                        .collect(Collectors.toList());
+    }
+
     public List<ServiceItem> getServiceList () {
         return servicesRepository.findAll()
                     .stream().map(this::mapToServiceItem)
@@ -54,6 +55,13 @@ public class ServicesService {
                 .name(service.getService_name())
                 .organisationName(orgNames)
                 .count(orgNames.size())
+                .build();
+    }
+
+    private AddressItem mapToItem(PerformingOrganisation org) {
+        return AddressItem.builder()
+                .id(org.getId())
+                .text(org.getOrganisationName())
                 .build();
     }
 
