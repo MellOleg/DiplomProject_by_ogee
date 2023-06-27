@@ -3,7 +3,7 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Diplom</title>
+        <title>Гродно ЖКХ Сервисы</title>
         <link rel="stylesheet" href="/static/style.css">
         <link rel="stylesheet" href="/static/select2-bootstrap4.css">
         <link rel="stylesheet" href="/static/select2.css">
