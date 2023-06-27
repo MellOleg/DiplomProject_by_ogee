@@ -2,6 +2,7 @@ package org.olegmell.service;
 
 import org.olegmell.domain.Request;
 import org.olegmell.domain.User;
+import org.olegmell.repository.PerformingOrganisationRepository;
 import org.olegmell.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -23,10 +24,13 @@ public class RequestService{
 
     @Autowired
     private ServicesService servicesService;
+    private final PerformingOrganisationRepository performingOrganisationRepository;
 
     @Autowired
-    public RequestService(RequestRepository requestRepository) {
+    public RequestService(RequestRepository requestRepository,
+                          PerformingOrganisationRepository performingOrganisationRepository) {
         this.requestRepository = requestRepository;
+        this.performingOrganisationRepository = performingOrganisationRepository;
     }
 
     public Integer createRequest (Request request, Integer statusId, Integer serviceId, User user){
@@ -37,23 +41,25 @@ public class RequestService{
         return newRequest.getId();
     }
 
-    public void updateRequest (Request request, Integer addressId, Integer statusId, Integer serviceId){
+    public void updateRequest (Request request, Integer addressId, Integer statusId, Integer serviceId, Integer orgId){
         Request existingRequest = requestRepository.getOne(request.getId());
         existingRequest.setAddress(addressService.getAddress(addressId));
         existingRequest.setStatus(statusService.getStatusById(statusId));
         existingRequest.setService(servicesService.getServicesById(serviceId));
+        existingRequest.setPerformingOrganisation(performingOrganisationRepository.getOne(orgId));
         existingRequest.setText(request.getText());
         existingRequest.setFilename(request.getFilename());
         if (statusId == 3){ existingRequest.setCompletedTime(Calendar.getInstance().getTime()); }
 
         requestRepository.saveAndFlush(existingRequest);
     }
-    public void updateRequest (Request request, Integer addressId, Integer statusId, Integer serviceId, String filename){
+    public void updateRequest (Request request, Integer addressId, Integer statusId, Integer serviceId, Integer orgId, String filename){
         Request existingRequest = requestRepository.getOne(request.getId());
         existingRequest.setFilename(filename);
         existingRequest.setAddress(addressService.getAddress(addressId));
         existingRequest.setStatus(statusService.getStatusById(statusId));
         existingRequest.setService(servicesService.getServicesById(serviceId));
+        existingRequest.setPerformingOrganisation(performingOrganisationRepository.getOne(orgId));
         existingRequest.setText(request.getText());
         existingRequest.setFilename(request.getFilename());
         if (statusId == 3){ existingRequest.setCompletedTime(Calendar.getInstance().getTime()); }

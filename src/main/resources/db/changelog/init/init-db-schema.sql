@@ -8,6 +8,7 @@ create table request (
                          user_id int4,
                          status_id int4,
                          service_id int4,
+                         organisation_id int4,
                          creation_date TIMESTAMP,
                          last_modified TIMESTAMP,
                          completion_date TIMESTAMP,

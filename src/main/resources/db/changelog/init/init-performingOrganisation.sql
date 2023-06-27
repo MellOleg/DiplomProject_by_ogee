@@ -9,4 +9,8 @@ create table performing_organisation (
 
 alter table if exists performing_organisation
     add constraint performing_organisation_services_fk
-        foreign key (service_id) references services
+        foreign key (service_id) references services;
+
+alter table if exists request
+    add constraint request_performing_organisation_fk
+        foreign key (organisation_id) references performing_organisation;

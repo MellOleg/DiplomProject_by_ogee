@@ -126,6 +126,7 @@ public class RequestController {
             @RequestParam("file")MultipartFile file,
             @RequestParam("address")Integer addressId,
             @RequestParam("requestServices")Integer serviceId,
+            @RequestParam("performingOrganisation")Integer orgId,
             @RequestParam("requestStatus")Integer statusId,
             @RequestParam("filename")String filename)
             throws IOException {
@@ -135,11 +136,11 @@ public class RequestController {
             model.addAttribute("request", request);
             return "editRequest" ;
         } else if (file.isEmpty()){
-            requestService.updateRequest(request, addressId, statusId, serviceId, filename);
+            requestService.updateRequest(request, addressId, statusId, serviceId, orgId, filename);
         } else {
             saveFile(request, file);
             model.addAttribute("request", null);
-            requestService.updateRequest(request, addressId, statusId, serviceId);
+            requestService.updateRequest(request, addressId, statusId, serviceId, orgId);
         }
 
         Iterable<Services> requestServices = servicesService.getAllServices();
