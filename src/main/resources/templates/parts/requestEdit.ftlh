@@ -85,7 +85,7 @@
 				language: "ru",
 				theme: "bootstrap4",
                 ajax: {
-                    url: 'http://localhost:8080/address',
+                    url: '/address',
                     dataType: 'json',
                     type: "GET",
                     processResults: function (response) {
