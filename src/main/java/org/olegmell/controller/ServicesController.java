@@ -27,7 +27,9 @@ public class ServicesController {
     @GetMapping
     public String ServicesList(Model model) {
         Iterable<ServiceItem> servicesIterable = servicesService.getServiceList();
+        Iterable<PerformingOrganisation> organisationIterable = organisationService.getAllOrganisation();
 
+        model.addAttribute("organisationIterable", organisationIterable);
         model.addAttribute("servicesIterable", servicesIterable);
         return "servicesList";
     }

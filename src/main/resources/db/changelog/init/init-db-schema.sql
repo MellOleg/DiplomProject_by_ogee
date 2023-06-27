@@ -33,6 +33,7 @@ create table usr (
 create table services (
                           id serial not null,
                           service_name varchar(255),
+                          price int4,
                           primary key (id));
 
 alter table if exists request

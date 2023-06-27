@@ -3,9 +3,9 @@
 <@c.page>
     <section class="main-block-services">
         <div class="border-block-services">
-            <li class="nav-item">
-                <a class="btn btn-primary" href="/admin/services/add">Добавить услугу</a>
-            </li><br>
+<#--            <li class="nav-item">-->
+<#--                <a class="btn btn-primary" href="/admin/services/add">Добавить услугу</a>-->
+<#--            </li><br>-->
 <#--            <li class="nav-item">-->
 <#--                <a class="btn btn-primary" href="/organisation/add">Добавить организацию</a>-->
 <#--            </li><br>-->
@@ -33,8 +33,24 @@
                 </#list>
 
                 </tbody>
-            </table>
+            </table><br>
 
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Исполняющая организация</th>
+                    <th scope="col">Телефон организации</th>
+                </tr>
+                </thead>
+                <tbody>
+                <#list organisationIterable as organistion>
+                    <tr>
+                        <td>${organistion.organisationName}</td>
+                        <td>${organistion.organisationPhoneNumber}</td>
+                    </tr>
+                </#list>
+                </tbody>
+            </table>
             <br>
         </div>
     </section>

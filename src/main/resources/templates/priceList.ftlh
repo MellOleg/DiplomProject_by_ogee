@@ -12,16 +12,8 @@
         <tbody>
         <#list servicesIterable as service>
         <tr>
-            <#function randomNumber salt>
-                <#local str= .now?long />
-                <#assign str = (str * salt)/3 />
-                <#return str[(str?string?length-5)..]/>
-            </#function>
-
-
-            <#assign rnd = randomNumber(7)/>
             <td>${service.service_name}</td>
-            <td>${rnd}</td>
+            <td>${service.price} руб.</td>
         </tr>
         </#list>
         </tbody>

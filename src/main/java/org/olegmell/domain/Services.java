@@ -16,6 +16,8 @@ public class Services {
 
     private String service_name;
 
+    private Integer price;
+
     @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
     private Set<Request> requests;
 
