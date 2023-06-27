@@ -47,7 +47,7 @@ public class ServicesService {
     private ServiceItem mapToServiceItem(Services service) {
         List<String> orgNames = service.getOrganisationsServices()
                 .stream().
-                map(PerformingOrganisation::getOrganisationName).
+                map(PerformingOrganisation::getDetails).
                 collect(Collectors.toList());
 
         return ServiceItem.builder()

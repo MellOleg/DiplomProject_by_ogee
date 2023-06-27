@@ -1,6 +1,7 @@
 package org.olegmell.controller;
 
 import org.olegmell.domain.AddressItem;
+import org.olegmell.domain.PerformingOrganisation;
 import org.olegmell.domain.ServiceItem;
 import org.olegmell.domain.Services;
 import org.olegmell.service.PerformingOrganisationService;

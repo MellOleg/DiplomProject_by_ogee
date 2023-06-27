@@ -22,4 +22,8 @@ public class PerformingOrganisation {
 
     @OneToMany(mappedBy = "performingOrganisation", fetch = FetchType.LAZY)
     private Set<Request> requestSet;
+
+    public String getDetails (){
+        return String.format("%s (телефон: %s)" ,this.organisationName,this.organisationPhoneNumber);
+    }
 }

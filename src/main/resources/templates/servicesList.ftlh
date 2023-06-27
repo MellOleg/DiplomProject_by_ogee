@@ -35,22 +35,6 @@
                 </tbody>
             </table><br>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Исполняющая организация</th>
-                    <th scope="col">Телефон организации</th>
-                </tr>
-                </thead>
-                <tbody>
-                <#list organisationIterable as organistion>
-                    <tr>
-                        <td>${organistion.organisationName}</td>
-                        <td>${organistion.organisationPhoneNumber}</td>
-                    </tr>
-                </#list>
-                </tbody>
-            </table>
             <br>
         </div>
     </section>
