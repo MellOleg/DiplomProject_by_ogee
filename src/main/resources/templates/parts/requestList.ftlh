@@ -19,7 +19,7 @@
                     </div>
                     <div class="chmo">
                         <#if isAdmin>
-                            <a href="myrequests/${request.author.id}">${request.authorName}</a><!-- authorName -->
+                            <a ${request.author.id}">${request.authorName}</a><!-- authorName -->
 
                             <a class="btn btn-primary" href="/request/edit/${request.id}">
                                 Изменить

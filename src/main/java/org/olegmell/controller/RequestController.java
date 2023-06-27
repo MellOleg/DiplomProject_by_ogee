@@ -100,7 +100,7 @@ public class RequestController {
         return "redirect:/user/myrequests";
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/edit/{requestId}")
     public String updateRequest(@PathVariable Integer requestId, Model model) {
         Iterable<Status> requestStatus = statusService.getAllStatuses();
@@ -116,7 +116,7 @@ public class RequestController {
 
         return "editRequest";
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(path="/edit/{requestId}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public String updateRequest(
             @AuthenticationPrincipal User user,
