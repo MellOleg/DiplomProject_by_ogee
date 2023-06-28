@@ -165,8 +165,18 @@ position: absolute;
     margin: 0 auto;
     padding: 0px 100px 0px 100px;
 }
-.main-block-profile{
+.main-block-requestList{
     margin-top: 60px;
+}
+.border-block-requestList{
+    position: relative;
+    z-index: 10;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0px 100px 0px 100px;
+}
+.main-block-profile{
+    margin-top: 160px;
 }
 .border-block-profile{
     position: relative;
@@ -324,7 +334,7 @@ flex: 1 1 auto;
     width: calc(100% - 600px);
     padding: 0 30px;
 }
-
+.card1{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}.card1>hr{margin-right:0;margin-left:0}.card1>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}.card1>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.card1-body{-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}.card1-title{margin-bottom:.75rem}.card1-subtitle{margin-top:-.375rem;margin-bottom:0}.card1-text:last-child{margin-bottom:0}.card1-link:hover{text-decoration:none}.card1-link+.card1-link{margin-left:1.25rem}.card1-header{padding:.75rem 1.25rem;margin-bottom:0;background-color:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.125)}.card1-header:first-child{border-radius:calc(.25rem - 1px) calc(.25rem - 1px) 0 0}.card1-header+.list-group .list-group-item:first-child{border-top:0}.card1-footer{padding:.75rem 1.25rem;background-color:rgba(0,0,0,.03);border-top:1px solid rgba(0,0,0,.125)}.card1-footer:last-child{border-radius:0 0 calc(.25rem - 1px) calc(.25rem - 1px)}.card1-header-tabs{margin-right:-.625rem;margin-bottom:-.75rem;margin-left:-.625rem;border-bottom:0}.card1-header-pills{margin-right:-.625rem;margin-left:-.625rem}.card1-img-overlay{position:absolute;top:0;right:0;bottom:0;left:0;padding:1.25rem}.card1-img{width:100%;border-radius:calc(.25rem - 1px)}.card1-img-top{width:100%;border-top-left-radius:calc(.25rem - 1px);border-top-right-radius:calc(.25rem - 1px)}.card1-img-bottom{width:100%;border-bottom-right-radius:calc(.25rem - 1px);border-bottom-left-radius:calc(.25rem - 1px)}.card1-deck{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.card1-deck .card1{margin-bottom:15px}@media (min-width:576px){.card1-deck{-ms-flex-flow:row wrap;flex-flow:row wrap;margin-right:-15px;margin-left:-15px}.card1-deck .card1{display:-ms-flexbox;display:flex;-ms-flex:1 0 0%;flex:1 0 0%;-ms-flex-direction:column;flex-direction:column;margin-right:15px;margin-bottom:0;margin-left:15px}}.card1-group{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.card1-group>.card1{margin-bottom:15px}@media (min-width:576px){.card1-group{-ms-flex-flow:row wrap;flex-flow:row wrap}.card1-group>.card1{-ms-flex:1 0 0%;flex:1 0 0%;margin-bottom:0}.card1-group>.card1+.card1{margin-left:0;border-left:0}.card1-group>.card1:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.card1-group>.card1:not(:last-child) .card1-header,.card1-group>.card1:not(:last-child) .card1-img-top{border-top-right-radius:0}.card1-group>.card1:not(:last-child) .card1-footer,.card1-group>.card1:not(:last-child) .card1-img-bottom{border-bottom-right-radius:0}.card1-group>.card1:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.card1-group>.card1:not(:first-child) .card1-header,.card1-group>.card1:not(:first-child) .card1-img-top{border-top-left-radius:0}.card1-group>.card1:not(:first-child) .card1-footer,.card1-group>.card1:not(:first-child) .card1-img-bottom{border-bottom-left-radius:0}}.card1-columns .card1{margin-bottom:.75rem}@media (min-width:576px){.card1-columns{-webkit-column-count:3;-moz-column-count:3;column-count:3;-webkit-column-gap:1.25rem;-moz-column-gap:1.25rem;column-gap:1.25rem;orphans:1;widows:1}.card1-columns .card1{display:inline-block;width:100%}}.accordion>.card1{overflow:hidden}.accordion>.card1:not(:first-of-type) .card1-header:first-child{border-radius:0}.accordion>.card1:not(:first-of-type):not(:last-of-type){border-bottom:0;border-radius:0}.accordion>.card1:first-of-type{border-bottom:0;border-bottom-right-radius:0;border-bottom-left-radius:0}.accordion>.card1:last-of-type{border-top-left-radius:0;border-top-right-radius:0}.accordion>.card1 .card1-header{margin-bottom:-1px}
 
 
 

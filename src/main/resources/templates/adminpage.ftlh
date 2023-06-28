@@ -5,7 +5,7 @@
         <div class="border-block-adminpage">
             <#list requests as request>
                 <#if request.status.name == "На рассмотрении">
-                    <div class="card mb-3" style="max-width: 740px;">
+                    <div class="card1 mb-3" style="max-width: 740px;">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <#if request.filename??>
@@ -15,16 +15,16 @@
                             </#if>
                         </div>
                         <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">${request.service.service_name}</h5>
-                                <span class="card-text">${request.text}</span><br>
-                                <span class="card-text">${request.address.address}</span><br>
+                            <div class="card1-body">
+                                <h5 class="card1-title">${request.service.service_name}</h5>
+                                <span class="card1-text">${request.text}</span><br>
+                                <span class="card1-text">${request.address.address}</span><br>
                                 <#if request.performingOrganisation??> <span>Организация - ${request.performingOrganisation.organisationName}</span><br></#if>
-                                <p class="card-text"><small class="text-muted">${request.status.name}</small>
+                                <p class="card1-text"><small class="text-muted">${request.status.name}</small>
                                 </p>
                             </div>
 
-                            <div class="card-footer">
+                            <div class="card1-footer">
                                 <a class="btn btn-primary" href="/request/edit/${request.id}">
                                     Изменить
                                 </a>

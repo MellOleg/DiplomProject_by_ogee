@@ -1,6 +1,6 @@
 <#include "security.ftlh">
-<section class="main-block-requestList">
-    <div class="border-block-requestList">
+<section class="main-block-services">
+    <div class="border-block-services">
         <div class="card-columns" xmlns="http://www.w3.org/1999/html">
             <#list requests as request>
                 <div class="card card-blog  ">
