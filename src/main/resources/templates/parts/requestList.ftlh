@@ -3,7 +3,7 @@
     <div class="border-block-requestList">
         <div class="card-columns" xmlns="http://www.w3.org/1999/html">
             <#list requests as request>
-                <div class="card card-blog">
+                <div class="card card-blog  ">
                     <div class="card-image">
                     <#if request.filename??>
                         <img src="/img/${request.filename}" class="card-img-top">
@@ -16,6 +16,7 @@
                         <i>${request.address.address}</i><br>
                         <span>Статус - ${request.status.name}</span><br>
                         <span>Услуга - ${request.service.service_name}</span><br>
+                        <#if request.performingOrganisation??> <span>Организация - ${request.performingOrganisation.organisationName}</span><br></#if>
                     </div>
                     <div class="chmo">
                         <#if isAdmin>

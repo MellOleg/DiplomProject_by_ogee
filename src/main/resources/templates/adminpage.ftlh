@@ -17,8 +17,9 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">${request.service.service_name}</h5>
-                                <p class="card-text">${request.text}</p>
-                                <p class="card-text">${request.address.address}</p>
+                                <span class="card-text">${request.text}</span><br>
+                                <span class="card-text">${request.address.address}</span><br>
+                                <#if request.performingOrganisation??> <span>Организация - ${request.performingOrganisation.organisationName}</span><br></#if>
                                 <p class="card-text"><small class="text-muted">${request.status.name}</small>
                                 </p>
                             </div>

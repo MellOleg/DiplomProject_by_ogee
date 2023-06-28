@@ -216,7 +216,7 @@ position: absolute;
     flex: 0 1 33.333%;
     display: flex;
 
-    /*min-height: 480px;*/
+    min-height: 500px;
     flex-direction: column;
     position: relative;
     width: 100%;
@@ -324,5 +324,7 @@ flex: 1 1 auto;
     width: calc(100% - 600px);
     padding: 0 30px;
 }
+
+
 
 

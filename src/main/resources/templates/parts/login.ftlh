@@ -58,6 +58,8 @@
                                     <#if !isRegisterForm>
                                         <a href="/registration">Зарегистрироваться</a></br>
                                     </#if>
+                                    <p class="card-text"><small class="text-muted">Семь раз отмерь, один раз отрежь! Всегда проверяйте, корректрны ли ваши введенные данные, что бы не случилось ничего непоправимого...<br>
+                                        В случае необходимости, обратитесь к администрации</small>
                                     <div class="text-center">
                                         <button class="btn btn-primary mt-2" type="submit"/><#if isRegisterForm>Зарегистрироваться<#else>Войти</#if></button></br>
                                     </div>
