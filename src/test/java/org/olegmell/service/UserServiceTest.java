@@ -52,6 +52,7 @@ public class UserServiceTest {
     }
 } */
 
+import org.mockito.Mockito;
 import org.olegmell.domain.User;
 import org.olegmell.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -75,8 +76,12 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
     private MailSender mailSender;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private UserService userService;
@@ -118,22 +123,29 @@ class UserServiceTest {
         user.setEmail("email@example.com");
 
         when(userRepository.findByUsername("newuser")).thenReturn(null);
+        when(passwordEncoder.encode("plainpassword")).thenReturn("encodedPassword");
 
-        PasswordEncoder encoder = mock(PasswordEncoder.class);
-        when(encoder.encode("plainpassword")).thenReturn("encodedPassword");
-        userService = new UserService(userRepository);
-        ReflectionTestUtils.setField(userService, "passwordEncoder", encoder);
 
-        MailSender mailSender = mock(MailSender.class);
-        ReflectionTestUtils.setField(userService, "mailSender", mailSender);
+//        PasswordEncoder encoder = mock(PasswordEncoder.class);
+//        when(encoder.encode("plainpassword")).thenReturn("encodedPassword");
+//        userService = new UserService(userRepository,mailSender,passwordEncoder);
+//        ReflectionTestUtils.setField(userService, "passwordEncoder", encoder);
+//
+//        MailSender mailSender = mock(MailSender.class);
+//        ReflectionTestUtils.setField(userService, "mailSender", mailSender);
 
         boolean result = userService.addUser(user);
+
+        System.out.println(result);
 
         assertTrue(result);
         assertNotNull(user.getActivationCode());
         assertTrue(user.isActive());
+        assertEquals("encodedPassword", user.getPassword());
+        System.out.println(user.getPassword());
         verify(userRepository, times(1)).save(user);
         verify(mailSender, times(1)).send(eq("email@example.com"), anyString(), contains("http://localhost:8080/activate/"));
+
     }
 
     @Test
@@ -189,5 +201,33 @@ class UserServiceTest {
         when(userRepository.findByUsername("username")).thenReturn(null);
         assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername("username"));
     }
+    @Test
+    void addUser_shouldSendEmailIfEmailPresent() {
+        User user = new User();
+        user.setUsername("username");
+        user.setPassword("plainpassword");
+        user.setEmail("email@example.com");
 
+        when(userRepository.findByUsername("username")).thenReturn(null);
+        when(passwordEncoder.encode("plainpassword")).thenReturn("encodedPassword");
+
+        userService.addUser(user);
+
+        assertEquals("encodedPassword", user.getPassword());
+        verify(mailSender, times(1)).send(eq("email@example.com"), anyString(), contains("http://localhost:8080/activate/"));
+    }
+
+    @Test
+    void addUser_shouldSendEmailIfEmailEmpty() {
+        User user = new User();
+        user.setUsername("username");
+        user.setPassword("plainpassword");
+        user.setEmail("");
+
+        when(userRepository.findByUsername("username")).thenReturn(null);
+
+        userService.addUser(user);
+        verify(mailSender, never()).send(anyString(), anyString(), anyString());
+
+    }
 }

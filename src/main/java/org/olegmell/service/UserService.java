@@ -26,8 +26,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, MailSender mailSender, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.mailSender =  mailSender;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
