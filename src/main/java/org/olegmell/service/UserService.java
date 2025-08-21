@@ -26,9 +26,19 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public UserService(UserRepository userRepository, MailSender mailSender, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.mailSender =  mailSender;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
     public boolean addUser(User user){
@@ -107,7 +117,7 @@ public class UserService implements UserDetailsService {
     }
 
     public Iterable<Request> getUserRequests (User user){
-       return userRepository.getOne(user.getId()).getRequests();
+        return userRepository.getOne(user.getId()).getRequests();
     }
 
     public Iterable<Request> getActiveUserRequests (User user){
@@ -120,4 +130,15 @@ public class UserService implements UserDetailsService {
     public void deleteUserById (Integer userId){
         userRepository.deleteById(userId);
     }
+
+    //Method for UserServiceTest
+    Optional <User> findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    //Method for UserServiceTest
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }
